@@ -1,0 +1,5 @@
+INDEX VERSION 1.134
+C:\PersonalCare\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3556200301.index
+\hair-and-skincare\src\main\java
+C:\PersonalCare\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1774639541.index
+\hair-and-skincare\src\main\java
