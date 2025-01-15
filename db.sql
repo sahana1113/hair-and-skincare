@@ -110,17 +110,18 @@ DROP TABLE IF EXISTS `hair`;
 CREATE TABLE `hair` (
   `hair_id` int NOT NULL AUTO_INCREMENT,
   `user_id` int NOT NULL,
-  `hair_type` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `hair_type` text COLLATE utf8mb4_general_ci,
   `hair_concerns` text COLLATE utf8mb4_general_ci,
-  `scalp_type` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `scalp_type` text COLLATE utf8mb4_general_ci,
   `current_haircare_routine` text COLLATE utf8mb4_general_ci,
   `styling_habits` text COLLATE utf8mb4_general_ci,
   `lifestyle_factors` text COLLATE utf8mb4_general_ci,
   `goals` text COLLATE utf8mb4_general_ci,
+  `allergies` text COLLATE utf8mb4_general_ci,
   PRIMARY KEY (`hair_id`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `hair_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -129,6 +130,7 @@ CREATE TABLE `hair` (
 
 LOCK TABLES `hair` WRITE;
 /*!40000 ALTER TABLE `hair` DISABLE KEYS */;
+INSERT INTO `hair` VALUES (1,1,'{\"hairType\":\"Wavy\",\"hairLength\":\"Medium\",\"hairTexture\":\"Medium\"}','null','[\"Dry scalp\"]','{\"wash_frequency\":\"Every 2-3 days\",\"products\":[\"Shampoo\",\"Hair mask\",\"Hair oil\"]}','{\"styling_tools\":\"Rarely\",\"chemicalTreatments\":true,\"treatmentDetails\":\"keratin\"}','{\"seasonalEffects\":\"No seasonal changes\",\"diet\":\"Vegetarian or vegan\",\"water_intake\":\"More than 2 liters\",\"stress_level\":\"Moderate\"}','\"Yes, thicker hair\"','{\"hasAllergies\":true,\"allergyDetails\":\"parabean\",\"prefered_natural\":\"Yes\"}'),(2,1,'{\"hairType\":\"Wavy\",\"hairLength\":\"Medium\",\"hairTexture\":\"Medium\"}','null','[\"Dry scalp\"]','{\"wash_frequency\":\"Every 2-3 days\",\"products\":[\"Shampoo\",\"Hair mask\",\"Hair oil\"]}','{\"styling_tools\":\"Rarely\",\"chemicalTreatments\":true,\"treatmentDetails\":\"keratin\"}','{\"seasonalEffects\":\"No seasonal changes\",\"diet\":\"Vegetarian or vegan\",\"water_intake\":\"More than 2 liters\",\"stress_level\":\"Moderate\"}','\"Yes, thicker hair\"','{\"hasAllergies\":true,\"allergyDetails\":\"parabean\",\"prefered_natural\":\"Yes\"}'),(3,1,'{\"hairType\":\"Wavy\",\"hairLength\":\"Medium\",\"hairTexture\":\"Medium\"}','[\"Hair fall or thinning\",\"Dryness or frizziness\"]','[\"Dry scalp\"]','{\"wash_frequency\":\"Every 2-3 days\",\"products\":[\"Shampoo\",\"Hair mask\",\"Hair oil\"]}','{\"styling_tools\":\"Rarely\",\"chemicalTreatments\":true,\"treatmentDetails\":\"keratin\"}','{\"seasonalEffects\":\"No seasonal changes\",\"diet\":\"Vegetarian or vegan\",\"water_intake\":\"More than 2 liters\",\"stress_level\":\"Moderate\"}','\"Yes, thicker hair\"','{\"hasAllergies\":true,\"allergyDetails\":\"parabean\",\"prefered_natural\":\"Yes\"}');
 /*!40000 ALTER TABLE `hair` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -204,12 +206,12 @@ CREATE TABLE `skin` (
   `skin_concerns` text COLLATE utf8mb4_general_ci,
   `allergies` text COLLATE utf8mb4_general_ci,
   `current_routine` text COLLATE utf8mb4_general_ci,
-  `dietary_habits` text COLLATE utf8mb4_general_ci,
+  `habits` text COLLATE utf8mb4_general_ci,
   `goals` text COLLATE utf8mb4_general_ci,
   PRIMARY KEY (`skin_id`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `skin_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -218,6 +220,7 @@ CREATE TABLE `skin` (
 
 LOCK TABLES `skin` WRITE;
 /*!40000 ALTER TABLE `skin` DISABLE KEYS */;
+INSERT INTO `skin` VALUES (1,1,'Dry','[\"Dullness\"]','{\"hasAllergies\":false}','{\"frequency\":\"Occasionally\",\"products\":[\"Cleanser\",\"Sunscreen\",\"Eye cream\"]}','{\"sunExposure\":\"Occasionally\",\"waterIntake\":\"More than 2 liters\",\"preferences\":[\"Natural or organic\",\"Cruelty-free\"]}','null'),(2,1,'Dry','[\"Fine lines and wrinkles\"]','{\"hasAllergies\":false}','{\"frequency\":\"Occasionally\",\"products\":[\"Toner\"]}','{\"sunExposure\":\"Occasionally\",\"waterIntake\":\"More than 2 liters\",\"preferences\":[\"Cruelty-free\"]}','null'),(3,1,'Dry','[\"Fine lines and wrinkles\"]','{\"hasAllergies\":false}','{\"frequency\":\"Rarely\",\"products\":[\"Toner\"]}','{\"sunExposure\":\"Daily (with sunscreen)\",\"waterIntake\":\"More than 2 liters\",\"preferences\":[\"Cruelty-free\"]}','[\"Minimize pores\"]'),(4,1,'Dry','[\"Dullness\",\"pimple\"]','{\"hasAllergies\":false}','{\"frequency\":\"Never\",\"products\":[\"Serum\"]}','{\"sunExposure\":\"Daily (without sunscreen)\",\"waterIntake\":\"More than 2 liters\",\"preferences\":[\"No specific preference\"]}','[\"Achieve glowing skin\"]'),(5,1,'Dry','[\"p\",\"pi\",\"pim\",\"pimp\",\"pimpl\",\"pimple\",\"pimple\"]','{\"hasAllergies\":false}','{\"frequency\":\"Never\",\"products\":[\"Sunscreen\"]}','{\"sunExposure\":\"Daily (without sunscreen)\",\"waterIntake\":\"More than 2 liters\",\"preferences\":[\"No specific preference\"]}','[\"Minimize pores\"]'),(6,1,'Dry','[\"p\",\"pi\",\"pim\",\"pimp\",\"pimpl\",\"pimple\",\"pimple\"]','{\"hasAllergies\":false}','{\"frequency\":\"Occasionally\",\"products\":[\"Moisturizer\"]}','{\"sunExposure\":\"Occasionally\",\"waterIntake\":\"More than 2 liters\",\"preferences\":[\"Cruelty-free\"]}','[\"Achieve glowing skin\"]'),(7,1,'Dry','[\"Fine lines and wrinkles\"]','{\"hasAllergies\":false}','{\"frequency\":\"Never\",\"products\":[\"Serum\",\"Eye cream\"]}','{\"sunExposure\":\"Daily (without sunscreen)\",\"waterIntake\":\"More than 2 liters\",\"preferences\":[\"Vegan\",\"ntg\"]}','[\"no pimples\"]'),(8,1,'Dry','[\"Dullness\",\"pimples\"]','{\"hasAllergies\":false}','{\"frequency\":\"Never\",\"products\":[\"Face mask\",\"Eye cream\",\"Spot treatment\"]}','{\"sunExposure\":\"Daily (with sunscreen)\",\"waterIntake\":\"More than 2 liters\",\"preferences\":[\"Cruelty-free\",\"No specific preference\"]}','[\"Reduce redness\"]'),(9,1,'Dry','[\"Dryness or flakiness\",\"pimples\"]','{\"hasAllergies\":false}','{\"frequency\":\"Occasionally\",\"products\":[\"Face mask\"]}','{\"sunExposure\":\"Occasionally\",\"waterIntake\":\"More than 2 liters\",\"preferences\":[\"Vegan\"]}','[\"Reduce redness\"]'),(10,1,'Dry','[\"Dullness\",\"Enlarged pores\"]','{\"hasAllergies\":true,\"details\":\"CHLORINE\"}','{\"frequency\":\"Occasionally\",\"products\":[\"Moisturizer\",\"Eye cream\"]}','{\"sunExposure\":\"Occasionally\",\"waterIntake\":\"More than 2 liters\",\"preferences\":[\"Fragrance-free\",\"No specific preference\"]}','[\"Even out skin tone\",\"Improve skin elasticity\"]');
 /*!40000 ALTER TABLE `skin` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -263,11 +266,11 @@ CREATE TABLE `users` (
   `password` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `usermail` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `phonenumber` varchar(15) COLLATE utf8mb4_general_ci NOT NULL,
-  `age` int NOT NULL,
+  `age` bigint NOT NULL,
   `gender` enum('Male','Female','Other') COLLATE utf8mb4_general_ci NOT NULL,
   `location` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -276,6 +279,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (1,'Lily','$2a$10$4Q5HNOffLEBnc2EgZgF6AOEbTbqbyExDyneI.R1cWTB.GfbOWiwFa','lily@gmail.com','1313131313',46203955200,'Female','Chennai');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -288,4 +292,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-01-14 12:21:41
+-- Dump completed on 2025-01-15 22:01:47

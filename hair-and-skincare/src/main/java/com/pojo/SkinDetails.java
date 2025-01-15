@@ -162,7 +162,7 @@ public class SkinDetails {
 				+ skinConcerns.toString() + ", goals=" + goals.toString() + ", skincareFrequency=" + skincareFrequency + ", currentProducts="
 				+ currentProducts.toString() + ", allergies=" + allergies.toString() + ", sunExposure=" + sunExposure + ", skinTexture="
 				+ skinTexture + ", regularExperiences=" + regularExperiences.toString() + ", waterIntake=" + waterIntake
-				+ ", productPreference=" + productPreference.toString() + ", skinTreatment=" + skinTreatment.toString() + "]";
+				+ ", productPreference=" + productPreference.toString() +  "]";
 	}
     
 
