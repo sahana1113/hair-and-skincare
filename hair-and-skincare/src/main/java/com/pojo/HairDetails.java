@@ -1,30 +1,76 @@
 package com.pojo;
 
+import com.google.gson.annotations.SerializedName;
+import java.util.List;
+
 public class HairDetails {
-    private int hairId;
-    private int userId;
+    private String user_id;
+    private int hair_id;
+
+    @SerializedName("hair_type")
     private String hairType;
-    private String hairConcerns;
-    private String scalpType;
-    private String currentHaircareRoutine;
-    private String stylingHabits;
-    private String lifestyleFactors;
-    private String goals;
 
-    public int getHairId() {
-        return hairId;
+    @SerializedName("hair_concern")
+    private List<String> hairConcerns;
+
+    @SerializedName("hair_texture")
+    private String hairTexture;
+
+    @SerializedName("scalp_concern")
+    private List<String> scalpConcerns;
+
+    @SerializedName("hair_length")
+    private String hairLength;
+
+    @SerializedName("wash_frequency")
+    private String washFrequency;
+
+    @SerializedName("current_products")
+    private List<String> currentProducts;
+
+    @SerializedName("styling_tools")
+    private String stylingToolsUsage;
+
+    @SerializedName("chemical_treatments")
+    private List<String> chemicalTreatments;
+
+    @SerializedName("seasonal_effects")
+    private String seasonalEffects;
+
+    @SerializedName("growth_goals")
+    private String growthGoals;
+
+    @SerializedName("diet")
+    private String diet;
+
+    @SerializedName("water_intake")
+    private String waterIntake;
+
+    @SerializedName("stress_level")
+    private String stressLevel;
+
+    @SerializedName("natural_products")
+    private String naturalProductPreference;
+    
+    @SerializedName("allergies")
+    private List<String> allergies;
+
+    // Getters and Setters
+
+    public String getUser_id() {
+        return user_id;
     }
 
-    public void setHairId(int hairId) {
-        this.hairId = hairId;
+    public void setUser_id(String user_id) {
+        this.user_id = user_id;
     }
 
-    public int getUserId() {
-        return userId;
+    public int getHair_id() {
+        return hair_id;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setHair_id(int hair_id) {
+        this.hair_id = hair_id;
     }
 
     public String getHairType() {
@@ -35,52 +81,123 @@ public class HairDetails {
         this.hairType = hairType;
     }
 
-    public String getHairConcerns() {
+    public List<String> getHairConcerns() {
         return hairConcerns;
     }
 
-    public void setHairConcerns(String hairConcerns) {
+    public void setHairConcerns(List<String> hairConcerns) {
         this.hairConcerns = hairConcerns;
     }
 
-    public String getScalpType() {
-        return scalpType;
+    public String getHairTexture() {
+        return hairTexture;
     }
 
-    public void setScalpType(String scalpType) {
-        this.scalpType = scalpType;
+    public void setHairTexture(String hairTexture) {
+        this.hairTexture = hairTexture;
     }
 
-    public String getCurrentHaircareRoutine() {
-        return currentHaircareRoutine;
+    public List<String> getScalpConcerns() {
+        return scalpConcerns;
     }
 
-    public void setCurrentHaircareRoutine(String currentHaircareRoutine) {
-        this.currentHaircareRoutine = currentHaircareRoutine;
+    public void setScalpConcerns(List<String> scalpConcerns) {
+        this.scalpConcerns = scalpConcerns;
     }
 
-    public String getStylingHabits() {
-        return stylingHabits;
+    public String getHairLength() {
+        return hairLength;
     }
 
-    public void setStylingHabits(String stylingHabits) {
-        this.stylingHabits = stylingHabits;
+    public void setHairLength(String hairLength) {
+        this.hairLength = hairLength;
     }
 
-    public String getLifestyleFactors() {
-        return lifestyleFactors;
+    public String getWashFrequency() {
+        return washFrequency;
     }
 
-    public void setLifestyleFactors(String lifestyleFactors) {
-        this.lifestyleFactors = lifestyleFactors;
+    public void setWashFrequency(String washFrequency) {
+        this.washFrequency = washFrequency;
     }
 
-    public String getGoals() {
-        return goals;
+    public List<String> getCurrentProducts() {
+        return currentProducts;
     }
 
-    public void setGoals(String goals) {
-        this.goals = goals;
+    public void setCurrentProducts(List<String> currentProducts) {
+        this.currentProducts = currentProducts;
+    }
+
+    public String getStylingToolsUsage() {
+        return stylingToolsUsage;
+    }
+
+    public void setStylingToolsUsage(String stylingToolsUsage) {
+        this.stylingToolsUsage = stylingToolsUsage;
+    }
+
+    public List<String> getChemicalTreatments() {
+        return chemicalTreatments;
+    }
+
+    public void setChemicalTreatments(List<String> chemicalTreatments) {
+        this.chemicalTreatments = chemicalTreatments;
+    }
+
+    public String getSeasonalEffects() {
+        return seasonalEffects;
+    }
+
+    public void setSeasonalEffects(String seasonalEffects) {
+        this.seasonalEffects = seasonalEffects;
+    }
+
+    public String getGrowthGoals() {
+        return growthGoals;
+    }
+
+    public void setGrowthGoals(String growthGoals) {
+        this.growthGoals = growthGoals;
+    }
+
+    public String getDiet() {
+        return diet;
+    }
+
+    public void setDiet(String diet) {
+        this.diet = diet;
+    }
+
+    public String getWaterIntake() {
+        return waterIntake;
+    }
+
+    public void setWaterIntake(String waterIntake) {
+        this.waterIntake = waterIntake;
+    }
+
+    public String getStressLevel() {
+        return stressLevel;
+    }
+
+    public void setStressLevel(String stressLevel) {
+        this.stressLevel = stressLevel;
+    }
+
+    public String getNaturalProductPreference() {
+        return naturalProductPreference;
+    }
+
+    public void setNaturalProductPreference(String naturalProductPreference) {
+        this.naturalProductPreference = naturalProductPreference;
+    }
+    
+    public List<String> getAllergies() {
+        return allergies;
+    }
+
+    public void setAllergies(List<String> allergies) {
+        this.allergies = allergies;
     }
 }
-

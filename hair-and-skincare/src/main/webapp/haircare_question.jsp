@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Skincare Questions</title>
+    <title>Haircare Questions</title>
     <style>
         #question-container {
             width: 50%;
@@ -91,20 +91,25 @@
     </div>
 
     <script>
-        // Questions and options
+        // Questions and options for haircare
         const questions = [
-            { field: "skin_type", text: "What is your skin type?", options: ["Oily", "Dry", "Combination", "Normal", "Sensitive"], multiple: false },
-            { field: "skin_concerns", text: "What are your primary skin concerns? (Multiple selections allowed)", options: ["Acne or breakouts", "Dark spots or hyperpigmentation", "Fine lines and wrinkles", "Redness or irritation", "Uneven skin tone", "Dullness", "Dryness or flakiness", "Enlarged pores", "Sensitivity", "Other"], multiple: true },
-            { field: "skin_goals", text: "What are your skin goals?", options: ["Clear acne", "Even out skin tone", "Brighten complexion", "Reduce wrinkles and fine lines", "Hydrate skin", "Improve skin elasticity", "Reduce redness", "Minimize pores", "Achieve glowing skin", "Other"], multiple: true },
-            { field: "skincare_frequency", text: "How often do you use skincare products?", options: ["Daily", "Occasionally", "Rarely", "Never"], multiple: false },
-            { field: "current_products", text: "What type of skincare products are you currently using? (Multiple selections allowed)", options: ["Cleanser", "Toner", "Serum", "Moisturizer", "Sunscreen", "Exfoliator (physical or chemical)", "Face mask", "Eye cream", "Spot treatment", "None"], multiple: true },
-            { field: "allergies", text: "Do you have any known allergies or sensitivities to skincare ingredients?", options: ["Yes I have", "No", "Not sure"], multiple: true },
-            { field: "sun_exposure", text: "How often are you exposed to the sun?", options: ["Rarely", "Occasionally", "Daily (with sunscreen)", "Daily (without sunscreen)"], multiple: false },
-            { field: "skin_texture", text: "What is your skin texture like?", options: ["Smooth", "Rough or uneven", "Bumpy (e.g., small pimples or blackheads)", "Other"], multiple: false },
-            { field: "regular_experiences", text: "Do you experience any of the following regularly? (Multiple selections allowed)", options: ["Excessive oiliness", "Flaking or peeling", "Itching or burning", "Tightness after cleansing", "None of the above"], multiple: true },
-            { field: "water_intake", text: "How much water do you drink daily?", options: ["Less than 1 liter", "1 to 2 liters", "More than 2 liters"], multiple: false },
-            { field: "product_preference", text: "Do you have a preference for skincare products?", options: ["Natural or organic", "Dermatologist-recommended", "Cruelty-free", "Fragrance-free", "Vegan", "No specific preference","Other"], multiple: true },
-            { field: "skin_treatment", text: "Are you currently on any medication or treatment for your skin?", options: ["Yes I have", "No"], multiple: true }
+            { field: "hair_concern", text: "What is your primary hair concern?", options: ["Hair fall or thinning", "Dryness or frizziness", "Dandruff", "Oily scalp", "Split ends", "None", "Other"], multiple: true },
+            { field: "hair_type", text: "What is your hair type?", options: ["Straight", "Wavy", "Curly", "Coily", "Unsure"], multiple: false },
+            { field: "hair_length", text: "What is your hair length?", options: ["Short", "Medium", "Long"], multiple: false },
+            { field: "hair_texture", text: "How would you describe your hair texture?", options: ["Fine", "Medium", "Thick"], multiple: false },
+            { field: "scalp_concern", text: "Do you have any specific scalp concerns?", options: ["Itchy scalp", "Dry scalp", "Oily scalp", "Sensitive scalp", "None"], multiple: true },
+            { field: "wash_frequency", text: "How frequently do you wash your hair?", options: ["Daily", "Every 2-3 days", "Once a week","Other"], multiple: false },
+            { field: "current_products", text: "What type of haircare products do you currently use?", options: ["Shampoo", "Conditioner", "Hair mask", "Hair oil", "Leave-in conditioner", "None"], multiple: true },
+            { field: "styling_tools", text: "Do you use heat styling tools?", options: ["Frequently", "Occasionally", "Rarely", "Never"], multiple: false },
+            { field: "chemical_treatments", text: "Have you chemically treated your hair?", options: ["Yes I have", "No"], multiple: true },
+            { field: "seasonal_effects", text: "Do you notice seasonal changes in your hair condition?", options: ["Yes, worsens in winter", "Yes, worsens in summer", "No seasonal changes"], multiple: false },
+            { field: "diet", text: "Do you follow a specific diet that affects your hair?", options: ["Balanced diet", "Vegetarian or vegan", "Low protein", "Other"], multiple: false },
+            { field: "water_intake", text: "How much water do you drink daily?", options: ["Less than 1 liter", "1-2 liters", "More than 2 liters"], multiple: false },
+            { field: "stress_level", text: "How much stress do you experience regularly?", options: ["High", "Moderate", "Low"], multiple: false },
+            { field: "growth_goals", text: "Do you have a hair growth goal?", options: ["Yes, longer hair", "Yes, thicker hair", "No specific goal"], multiple: false },
+            { field: "allergies", text: "Do you have any allergies?", options: ["Yes I have", "No", "Not sure"], multiple: true },
+            { field: "natural_products", text: "Do you prefer natural or organic haircare solutions?", options: ["Yes", "No preference"], multiple: false }
+
         ];
 
         let currentQuestionIndex = 0;
@@ -138,7 +143,6 @@
             document.getElementById("other-option-input").value = "";
 
             if (answers[question.field] && answers[question.field].includes("Other")) {
-                // If the "Other" option was selected previously, show the input box with saved text
                 document.getElementById("other-option-input").style.display = "block";
                 document.getElementById("other-option-input").value = answers[question.field]["other"];
             }
@@ -160,14 +164,12 @@
         function selectOption(option, button) {
             const question = questions[currentQuestionIndex];
 
-            if (option === "Other" || option === "Yes I have") {
-                // Show the input box for the "Other" option
+            if (option === "Other" || option=="Yes I have") {
                 document.getElementById("other-option-input").style.display = "block";
             } else {
                 if (question.multiple) {
-                    button.classList.toggle('selected'); // Toggle selection color for multiple options
+                    button.classList.toggle('selected');
                 } else {
-                    // For single-option questions, save the answer and move to the next question immediately
                     answers[question.field] = [option];
                     nextQuestion();
                 }
@@ -178,39 +180,35 @@
             const question = questions[currentQuestionIndex];
 
             if (question.multiple) {
-                // For multiple-selection questions, save selected options as an array
                 const selectedOptions = Array.from(document.querySelectorAll('.option-button.selected'))
                     .map(button => button.textContent);
                 if (selectedOptions.length > 0) {
                     answers[question.field] = selectedOptions;
                 }
             } else {
-                // For single-selection questions, save the selected option as a string
                 const selectedButton = document.querySelector('.option-button.selected');
                 if (selectedButton) {
-                    answers[question.field] = selectedButton.textContent; // Save as string
+                    answers[question.field] = selectedButton.textContent;
                 }
             }
 
-            // Check if the "Other" input is displayed and add its value to the answers for the current question
             if (document.getElementById("other-option-input").style.display === "block") {
                 const otherValue = document.getElementById("other-option-input").value;
                 if (otherValue) {
                     if (question.multiple) {
                         answers[question.field] = answers[question.field] || [];
-                        answers[question.field].push(otherValue); // Add the "Other" value to the array of selected options
+                        answers[question.field].push(otherValue);
                     } else {
-                        answers[question.field] = otherValue; // Save the "Other" value as a string for single-select questions
+                        answers[question.field] = otherValue;
                     }
                 }
             }
             if (!question.multiple && Array.isArray(answers[question.field])) {
                 answers[question.field] = answers[question.field][0];
             }
-        	console.log("Final answers before submitting:", JSON.stringify(answers, null, 2));
 
             currentQuestionIndex++;
-            if (currentQuestionIndex > questions.length) {
+            if (currentQuestionIndex >= questions.length) {
                 submitAnswers();
                 return;
             }
@@ -225,9 +223,9 @@
         }
 
         function submitAnswers() {
-        	console.log("Final answers before submitting:", JSON.stringify(answers, null, 2));
+            console.log("Final answers before submitting:", JSON.stringify(answers, null, 2));
 
-            fetch("SaveSkincareDataServlet", {
+            fetch("SaveHaircareDataServlet", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(answers),
@@ -235,7 +233,7 @@
                 .then((response) => response.text())
                 .then((data) => {
                     alert("Your answers have been saved successfully!");
-                    window.location.href = "select_option.jsp"; // Navigate back to the select page
+                    window.location.href = "select_option.jsp";
                 })
                 .catch((error) => {
                     console.error("Error submitting data:", error);

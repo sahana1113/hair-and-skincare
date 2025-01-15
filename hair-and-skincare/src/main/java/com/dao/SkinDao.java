@@ -29,16 +29,18 @@ public class SkinDao {
             skincareData.getSkincareFrequency(),
             skincareData.getCurrentProducts()
         ));
+        boolean allergies= !(skincareData.getAllergies().contains("No") || skincareData.getAllergies().contains("Not sure"));
+
         String allergiesJson = gson.toJson(new Allergies(
-            skincareData.getAllergies().contains("Yes I have"),
-            skincareData.getAllergies().contains("Other") 
-                ? skincareData.getAllergies().get(skincareData.getAllergies().size() - 1)
+        		allergies,
+                allergies ? skincareData.getAllergies().get(skincareData.getAllergies().size() - 1)
                 : null
         ));
         String habitsJson = gson.toJson(new Habits(
             skincareData.getSunExposure(),
             skincareData.getWaterIntake(),
-            skincareData.getProductPreference()
+            skincareData.getProductPreference(),
+            skincareData.getSkinTreatment()
         ));
 
         // Set parameters
@@ -84,11 +86,13 @@ private static class Habits {
     private String sunExposure;
     private String waterIntake;
     private List<String> preferences;
+    private List<String> skinTreatment;
 
-    public Habits(String sunExposure, String waterIntake, List<String> string) {
+    public Habits(String sunExposure, String waterIntake, List<String> string,List<String> pastMedications) {
         this.sunExposure = sunExposure;
         this.waterIntake = waterIntake;
         this.preferences = string;
+        this.skinTreatment=pastMedications;
     }
 }
 }
