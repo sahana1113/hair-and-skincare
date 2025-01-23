@@ -1,4 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
+<%@ page import="com.pojo.*" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -135,6 +137,10 @@ button:hover {
     opacity: 0;
     transition: opacity 0.3s ease;
 }
+.sidebar-header a {
+    text-decoration: none;
+    color:white;
+}
 
 .sidebar:hover .sidebar-header {
     opacity: 1;
@@ -183,19 +189,13 @@ button:hover {
 /* Hover effect on navigation links */
 .sidebar-nav li a:hover {
     padding-left: 20px; /* Smooth padding effect */
-    background-color: #4f809b; /* Lighter shade of blue on hover */
+    background-color: #87c9c8; /* Lighter shade of blue on hover */
+    color: black; /* Ensure text remains white on hover */
 }
 
 .sidebar-nav li a:hover .sidebar-text {
     display: inline; /* Ensure text is shown on hover */
 }
-
-/* Darker hover color for the sidebar navigation links */
-.sidebar-nav li a:hover {
-    background-color: #4f809b; /* Lighter blue color on hover */
-    color: #ffffff; /* Ensure text remains white on hover */
-}
-
 
 /* Logout Button */
 .logout-btn {
@@ -401,19 +401,19 @@ input[type="checkbox"]:checked::after {
     <!-- Sidebar Section -->
      <aside class="sidebar">
         <div class="sidebar-header">
-           <h2> Dashboard </h2>
+           <h2><a href="dashboard.jsp">Dashboard</a></h2>
         </div>
         <nav class="sidebar-nav">
             <ul>
-                <li><a href="#profile"><i class="fas fa-user"></i><span class="sidebar-text">Profile & Goals</span></a></li>
-                <li><a href="#routine"><i class="fas fa-calendar-day"></i><span class="sidebar-text">Your Daily Routine</span></a></li>
-                <li><a href="#skincare"><i class="fas fa-spa"></i></i><span class="sidebar-text">Skincare</span></a></li>
-                <li><a href="#haircare"><i class="fas fa-user-tie"></i><span class="sidebar-text">Haircare</span></a></li>
-                <li><a href="#habits"><i class="fas fa-heartbeat"></i><span class="sidebar-text">Track Your Habits</span></a></li>
-                <li><a href="#todo"><i class="fas fa-list"></i><span class="sidebar-text">Your To-Do List</span></a></li>
-                <li><a href="#streak"><i class="fas fa-fire"></i><span class="sidebar-text">Your Streak</span></a></li>
-                <li><a href="#rewards"><i class="fas fa-trophy"></i><span class="sidebar-text">Your Rewards</span></a></li>
-                <li><a href="#logout" class="logout-btn"><i class="fas fa-sign-out-alt"></i><span class="sidebar-text">Logout</span></a></li>
+                <li><a href="profile.jsp"><i class="fas fa-user"></i><span class="sidebar-text">Profile</span></a></li>
+                <li><a href="routine.jsp"><i class="fas fa-calendar-day"></i><span class="sidebar-text">Your Daily Routine</span></a></li>
+                <li><a href="skincare.jsp"><i class="fas fa-spa"></i></i><span class="sidebar-text">Skincare</span></a></li>
+                <li><a href="haircare.jsp"><i class="fas fa-user-tie"></i><span class="sidebar-text">Haircare</span></a></li>
+                <li><a href="habits.jsp"><i class="fas fa-heartbeat"></i><span class="sidebar-text">Track Your Habits</span></a></li>
+                <li><a href="todo.jsp"><i class="fas fa-list"></i><span class="sidebar-text">Your To-Do List</span></a></li>
+                <li><a href="streak.jsp"><i class="fas fa-fire"></i><span class="sidebar-text">Your Streak</span></a></li>
+                <li><a href="rewards.jsp"><i class="fas fa-trophy"></i><span class="sidebar-text">Your Rewards</span></a></li>
+                <li><a href="logout.jsp" class="logout-btn"><i class="fas fa-sign-out-alt"></i><span class="sidebar-text">Logout</span></a></li>
             </ul>
         </nav>
     </aside>
@@ -423,6 +423,13 @@ input[type="checkbox"]:checked::after {
             <h1>Welcome, [User Name]</h1>
             <p>Your daily routine, progress, and rewards are here!</p>
         </header> -->
+         <%
+    UserDetails user = (UserDetails) session.getAttribute("user");
+    if (user == null) {
+        response.sendRedirect("login.jsp"); // Redirect to login if user is not found
+        return;
+    }
+    %>
 
         <main class="main-content">
             <!-- Profile & Goals Section -->
@@ -433,7 +440,7 @@ input[type="checkbox"]:checked::after {
 						<img id="profile-img" src="images/girluser1.jpg"
 							alt="Profile Picture" />
 						<div>
-							<h2>Welcome, [User Name]!</h2>
+							<h2>Welcome, <%= user.getUsername() %>!</h2>
 							<p class="motivational-quote">"Small steps every day lead to
 								big changes tomorrow. Glow, grow, and thrive in every way."</p>
 						</div>

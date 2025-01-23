@@ -161,7 +161,7 @@ public class SkinDetails {
 		return "SkinDetails [user_id=" + user_id + ", skin_id=" + skin_id + ", skinType=" + skinType + ", skinConcerns="
 				+ skinConcerns.toString() + ", goals=" + goals.toString() + ", skincareFrequency=" + skincareFrequency + ", currentProducts="
 				+ currentProducts.toString() + ", allergies=" + allergies.toString() + ", sunExposure=" + sunExposure + ", skinTexture="
-				+ skinTexture + ", regularExperiences=" + regularExperiences.toString() + ", waterIntake=" + waterIntake
+				+ skinTexture + ", regularExperiences=" + regularExperiences!=null?regularExperiences.toString():"null" + ", waterIntake=" + waterIntake
 				+ ", productPreference=" + productPreference.toString() +  "]";
 	}
     

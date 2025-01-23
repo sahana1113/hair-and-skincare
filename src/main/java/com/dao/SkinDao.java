@@ -3,6 +3,7 @@ package com.dao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -60,6 +61,59 @@ public class SkinDao {
         return false; // Return false in case of an error
     }
 }
+    public SkinDetails getSkinDetailsByUserId(String userId) {
+        String query = "SELECT user_id, skin_id, skin_type, skin_concerns, goals, current_routine, allergies, habits FROM skin WHERE user_id = ?";
+        Gson gson = new Gson();
+
+        try (Connection con = getCon();
+             PreparedStatement stmt = con.prepareStatement(query)) {
+
+            stmt.setObject(1, userId);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    SkinDetails skinDetails = new SkinDetails();
+
+                    // Set simple attributes
+                    skinDetails.setUser_id(rs.getString("user_id"));
+                    skinDetails.setSkin_id(rs.getInt("skin_id"));
+                    skinDetails.setSkinType(rs.getString("skin_type"));
+
+                    // Parse JSON fields
+                    List<String> skinConcerns = gson.fromJson(rs.getString("skin_concerns"), List.class);
+                    skinDetails.setSkinConcerns(skinConcerns);
+
+                    List<String> goals = gson.fromJson(rs.getString("goals"), List.class);
+                    skinDetails.setGoals(goals);
+
+                    CurrentRoutine currentRoutine = gson.fromJson(rs.getString("current_routine"), CurrentRoutine.class);
+                    skinDetails.setSkincareFrequency(currentRoutine.frequency);
+                    skinDetails.setCurrentProducts(currentRoutine.products);
+
+                    Allergies allergies = gson.fromJson(rs.getString("allergies"), Allergies.class);
+                    if (allergies != null) {
+                        skinDetails.setAllergies(allergies.hasAllergies
+                            ? List.of(allergies.details)
+                            : List.of("No"));
+                    }
+
+                    Habits habits = gson.fromJson(rs.getString("habits"), Habits.class);
+                    if (habits != null) {
+                        skinDetails.setSunExposure(habits.sunExposure);
+                        skinDetails.setWaterIntake(habits.waterIntake);
+                        skinDetails.setProductPreference(habits.preferences);
+                        skinDetails.setSkinTreatment(habits.skinTreatment);
+                    }
+                    return skinDetails;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null; // Return null if no record is found or an exception occurs
+    }
+
 
 // Inner classes to structure JSON data
 private static class CurrentRoutine {

@@ -19,12 +19,13 @@ public class LoginServlet extends HttpServlet {
 
         // Use DAO to verify user credentials
         UserDao userDAO = new UserDao();
-        int isLoggedIn = userDAO.validateUser(loginUser);
+        UserDetails user = userDAO.validateUser(loginUser);
 
-        if (isLoggedIn!=0) {
+        if (user!=null) {
             // User is successfully logged in, start a session
             HttpSession session = request.getSession();
-            session.setAttribute("user_id",String.valueOf(isLoggedIn));
+            session.setAttribute("user_id",String.valueOf(user.getUserId()));
+            session.setAttribute("user", user);
 			response.sendRedirect("dashboard.jsp");
             // Redirect to the dashboard or a welcome page
             response.getWriter().println("Login successful!");

@@ -3,6 +3,7 @@ package com.dao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -78,6 +79,75 @@ public class HairDao {
         return false; // Return false in case of an error
     }
 }
+    public HairDetails getHairDetailsByUserId(String userId) {
+        String query = "SELECT * FROM hair WHERE user_id = ?";
+        Gson gson = new Gson();
+
+        try (Connection con = getCon(); 
+             PreparedStatement stmt = con.prepareStatement(query)) {
+            // Set the user ID parameter
+            stmt.setString(1, userId);
+
+            // Execute the query
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                HairDetails hairDetails = new HairDetails();
+
+                // Map the columns to the HairDetails object
+                hairDetails.setUser_id(rs.getString("user_id"));
+                hairDetails.setHair_id(rs.getInt("hair_id"));
+
+                // Deserialize JSON fields into appropriate Java objects
+                HairType hairType = gson.fromJson(rs.getString("hair_type"), HairType.class);
+                hairDetails.setHairType(hairType.hairType);
+                hairDetails.setHairLength(hairType.hairLength);
+                hairDetails.setHairTexture(hairType.hairTexture);
+
+                List<String> hairConcerns = gson.fromJson(rs.getString("hair_concerns"), List.class);
+                hairDetails.setHairConcerns(hairConcerns);
+
+                List<String> scalpConcerns = gson.fromJson(rs.getString("scalp_type"), List.class);
+                hairDetails.setScalpConcerns(scalpConcerns);
+
+                hairDetails.setGrowthGoals(gson.fromJson(rs.getString("goals"), String.class));
+
+                CurrentRoutine currentRoutine = gson.fromJson(rs.getString("current_haircare_routine"), CurrentRoutine.class);
+                hairDetails.setWashFrequency(currentRoutine.wash_frequency);
+                hairDetails.setCurrentProducts(currentRoutine.products);
+
+                Allergies allergies = gson.fromJson(rs.getString("allergies"), Allergies.class);
+                hairDetails.setNaturalProductPreference(allergies.prefered_natural);
+                if (allergies.hasAllergies) {
+                    hairDetails.setAllergies(List.of(allergies.allergyDetails));
+                } else {
+                    hairDetails.setAllergies(List.of("No"));
+                }
+
+                StylingHabits stylingHabits = gson.fromJson(rs.getString("styling_habits"), StylingHabits.class);
+                hairDetails.setStylingToolsUsage(stylingHabits.styling_tools);
+                if (stylingHabits.chemicalTreatments) {
+                    hairDetails.setChemicalTreatments(List.of(stylingHabits.treatmentDetails));
+                } else {
+                    hairDetails.setChemicalTreatments(List.of("No"));
+
+                }
+
+                LifeFactors lifeFactors = gson.fromJson(rs.getString("lifestyle_factors"), LifeFactors.class);
+                hairDetails.setSeasonalEffects(lifeFactors.seasonalEffects);
+                hairDetails.setDiet(lifeFactors.diet);
+                hairDetails.setWaterIntake(lifeFactors.water_intake);
+                hairDetails.setStressLevel(lifeFactors.stress_level);
+
+                return hairDetails; // Return the mapped HairDetails object
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null; // Return null if no record is found or an error occurs
+    }
+
 
     private static class HairType {
         private String hairType;

@@ -103,10 +103,16 @@
         </div>
 
         <!-- Others Tile -->
-        <div class="tile" onclick="navigateTo('others')">
+        <div class="tile" onclick="navigateTo('todo')">
             <img src="images/other.jpg" alt="Others">
-            <h2>To-Do & Habits</h2>
-   			<p>Stay on track with your goals! Manage your to-dos and build healthy habits.</p>
+            <h2>To-Do</h2>
+   			<p>Stay on track with your goals! Manage your to-dos.</p>
+        </div>
+        
+        <div class="tile" onclick="navigateTo('habit')">
+            <img src="images/habbits.jpg" alt="Others">
+            <h2>Habit Tracker</h2>
+   			<p>Monitor your habits and build healthy habits.</p>
         </div>
     </div>
 
