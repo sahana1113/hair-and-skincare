@@ -248,8 +248,11 @@ section {
 }
 
 h2 {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
+            color: #856c6c;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            border-bottom: 2px solid #f3d7d7;
+            padding-bottom: 10px;
 }
 
 h3 {
@@ -539,8 +542,33 @@ input[type="checkbox"]:checked::after {
             </ul>
         </div>
     </div>
+    <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
+<script type="module">
+	import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+
+createChat({
+	webhookUrl: 'https://trialadminai.app.n8n.cloud/webhook/cf842d52-e93a-41b0-90fb-a2b81bd8b24e/chat',
+	webhookConfig: {
+		method: 'POST',
+		headers: {}
+	},
+	target: '#n8n-chat',
+	mode: 'window',
+	chatInputKey: 'chatInput',
+	chatSessionKey: 'sessionId',
+	metadata: {},
+	showWelcomeScreen: false,
+	defaultLanguage: 'en',
+	initialMessages: [
+   		 'I\'m CareBot.',
+    	 'I\'m here to listen. How are you feeling right now?'
+	]
+});
+
+</script>
 
     <script>
+    
         function generateSkincareRecommendations() {
             document.getElementById('recommendation-modal').style.display = 'block';
         }

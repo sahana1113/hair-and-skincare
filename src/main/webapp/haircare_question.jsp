@@ -5,126 +5,389 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Haircare Questions</title>
         <style>
+
+        a {
+    text-decoration: none;
+    color: #444;
+} 
     body {
         font-family: 'Arial', sans-serif;
-        background: url('images/haircare.jpg') no-repeat center center fixed;
-        background-size: cover;
+        background: url('images/demo-hair-ques.jpg');
+        background-size: 105% 110%; /* Adjust the size */
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center;
         margin: 0;
         padding: 0;
         color: #333;
     }
+    .sidebar h2 {
+            color: #856c6c;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            border-bottom: 2px solid #f3d7d7;
+            padding-bottom: 10px;
+}
+    /* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
 
-    .container {
-        max-width: 800px;
-        margin: 50px auto;
-        background: rgba(255, 255, 255, 0.93);
-        border-radius: 15px;
-        padding: 20px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    }
+body {
+    background: linear-gradient(135deg, #e6e6fa 0%, #f0fff0 100%);
+    min-height: 100vh;
+    padding: 2rem;
+    color: #4a4a4a;
+}
 
-    .header {
-        text-align: center;
-        margin-bottom: 20px;
-    }
+/* Container Styles */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.92);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(147, 128, 180, 0.15);
+    backdrop-filter: blur(4px);
+}
 
-    .header img {
-        max-width: 150px;
-        border-radius: 50%;
-    }
-
-    h2 {
-        font-size: 1.8rem;
-        margin-bottom: 20px;
-        color: #444;
-    }
-
-    #options-container {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 15px;
-        margin-bottom: 20px;
-    }
-
-.option-button {
-    padding: 12px 20px;
-    border: 2px solid #cd8f9d; /* Border using your specified shade */
-    border-radius: 10px;
-    cursor: pointer;
-    background: linear-gradient(145deg, #e2a7b2, #f6d1d6); /* Subtle gradient with lighter variations of #cd8f9d */
-    color: #4a3136; /* Darker text for better contrast */
-    transition: all 0.3s ease;
-    flex: 1 1 calc(50% - 15px);
+/* Header Styles */
+.header {
     text-align: center;
-    font-size:20px;
-    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.1), -3px -3px 6px rgba(255, 255, 255, 0.7);
+    margin-bottom: 3rem;
+    padding: 1rem;
+}
+
+.header h1 {
+    font-size: 2.5rem;
+    color: #786fa6;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.header img {
+    max-width: 150px;
+    border-radius: 50%;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 15px rgba(147, 128, 180, 0.2);
+}
+
+/* Question Styles */
+#question-text {
+    font-size: 1.5rem;
+    color: #6c7b95;
+    margin-bottom: 2rem;
+    text-align: center;
+    line-height: 1.4;
+}
+
+/* Options Container */
+#options-container {
+    display: grid;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+/* Option Buttons */
+.option-button {
+    background: #fff;
+    border: 2px solid #e8e8e8;
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    font-size: 1rem;
+    color: #666;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    text-align: left;
 }
 
 .option-button:hover {
-    border-color: #b47785; /* Slightly darker border on hover */
-    background: #e8b5c0; /* A lighter hover background */
-    color: #3b262a; /* Darker text for hover state */
-    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2), -3px -3px 6px rgba(255, 255, 255, 0.9); /* Glow effect */
+    background: #f4f1f9;
+    border-color: #c5b6e0;
+    transform: translateY(-2px);
 }
 
 .option-button.selected {
-    background: #cd8f9d; /* Solid background for the selected state */
-    color: white; /* White text for contrast */
-    border-color: #a76f78; /* Darker shade for the selected border */
-    box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.2), inset -2px -2px 4px rgba(255, 255, 255, 0.8); /* Inset shadow effect */
+    background: #e8e3f5;
+    border-color: #b4a7d6;
+    color: #674ea7;
+    font-weight: 500;
 }
 
+/* Other Input Field */
+.other-input {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid #e8e8e8;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    font-size: 1rem;
+    display: none;
+}
 
-   
+.other-input:focus {
+    outline: none;
+    border-color: #c5b6e0;
+    background: #fbfaff;
+}
 
-    .other-input {
-        display: none;
-        width: 97%;
-        padding: 10px;
-        margin-top: 10px;
-        border-radius: 5px;
-        border: 1px solid #ddd;
-        font-size: 1rem;
-        box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+/* Button Group */
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+/* Navigation Buttons */
+#back-button,
+#next-button,
+#submit-button {
+    padding: 0.8rem 2rem;
+    border-radius: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    font-weight: 500;
+}
+
+#back-button {
+    background: #fff;
+    border: 2px solid #e8e8e8;
+    color: #666;
+}
+
+#back-button:hover {
+    background: #f8f8f8;
+}
+
+#next-button,
+#submit-button {
+    background: linear-gradient(135deg, #b4a7d6 0%, #9785c2 100%);
+    color: white;
+}
+
+#next-button:hover,
+#submit-button:hover {
+    background: linear-gradient(135deg, #9785c2 0%, #7c6ba1 100%);
+    transform: translateY(-2px);
+}
+
+/* Progress Indicator */
+.progress-bar {
+    width: 100%;
+    height: 6px;
+    background: #e8e8e8;
+    border-radius: 3px;
+    margin-top: 2rem;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #b4a7d6, #98ddca);
+    transition: width 0.3s ease;
+}
+
+/* Sidebar Modifications */
+.sidebar {
+    background: rgba(147, 128, 180, 0.95);
+    backdrop-filter: blur(4px);
+}
+
+.sidebar:hover {
+    background: rgba(120, 111, 166, 0.95);
+}
+
+.sidebar-nav li a:hover {
+    background: rgba(152, 221, 202, 0.3);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #b4a7d6;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #9785c2;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.container {
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+        margin: 1rem;
+    }
+
+    .header h1 {
+        font-size: 2rem;
+    }
+
+    #question-text {
+        font-size: 1.2rem;
+    }
+
+    .option-button {
+        padding: 0.8rem 1.2rem;
     }
 
     .button-group {
-        text-align: center;
-        margin-top: 20px;
+        flex-direction: column;
     }
 
-    /* Updated navigation buttons */
-    .button-group button {
-        padding: 12px 20px;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-        font-size: 1rem;
-        margin: 0 10px;
-        transition: all 0.3s ease;
+    #back-button,
+    #next-button,
+    #submit-button {
+        width: 100%;
     }
+}
 
-    #back-button {
-        background-color: #d3d3d3;
-        color: #333;
-    }
+  .sidebar {
+    width: 70px; /* Initially narrow */
+    background-color: rgba(49,85,100,0.9); /* Darker shade of blue */
+    color: #ffffff; /* White text for better contrast */
+    padding: 20px 10px;
+    position: fixed;
+    height: 100%;
+    top: 0;
+    left: 0;
+    transition: width 0.3s ease; /* Smooth transition for width */
+    overflow: hidden;
+    z-index: 100;
+}
 
-    #back-button:hover {
-        background-color: #bfbfbf;
-        color: #222;
-    }
+.sidebar-header {
+    text-align: center;
+    padding: 20px;
+    font-size: 1.8rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+.sidebar-header a {
+    text-decoration: none;
+    color:white;
+}
 
-    #next-button, #submit-button {
-        background-color: #613e30; /* Theme color */
-        color: white;
-    }
+.sidebar:hover .sidebar-header {
+    opacity: 1;
+}
 
-    #next-button:hover, #submit-button:hover {
-        background-color: #4d3024; /* Darker theme color */
-    }
+.sidebar-nav ul {
+    list-style: none;
+    margin-top: 20px;
+}
+
+.sidebar-nav li {
+    margin: 20px 0;
+}
+
+.sidebar-nav li a {
+    color: #ffffff; /* White text color */
+    font-size: 1.5rem;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s ease, padding-left 0.3s ease;
+}
+
+/* Icons */
+.sidebar-nav li a i {
+    margin-right: 10px;
+}
+
+/* Text hidden initially */
+.sidebar-nav li a .sidebar-text {
+    display: none;
+    margin-left: 10px;
+    font-size: 1rem;
+}
+
+/* Sidebar expands on hover */
+.sidebar:hover {
+    width: 250px; /* Expands on hover */
+    background-color: #2e4c5a; /* Darker shade on hover */
+}
+
+.sidebar:hover .sidebar-nav li a .sidebar-text {
+    display: inline; /* Show text when hovered */
+}
+
+/* Hover effect on navigation links */
+.sidebar-nav li a:hover {
+    padding-left: 20px; /* Smooth padding effect */
+    background-color: #87c9c8; /* Lighter shade of blue on hover */
+    color: black; /* Ensure text remains white on hover */
+}
+
+.sidebar-nav li a:hover .sidebar-text {
+    display: inline; /* Ensure text is shown on hover */
+}
+
+/* Logout Button */
+.logout-btn {
+    margin-top: 30px;
+    background-color: #e74c3c;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.logout-btn:hover {
+    background-color: #c0392b;
+}
 </style>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+      <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
+    <aside class="sidebar">
+        <div class="sidebar-header">
+           <h2><a href="dashboard.jsp">Dashboard</a></h2>
+        </div>
+        <nav class="sidebar-nav">
+            <ul>
+                <li><a href="profile.jsp"><i class="fas fa-user"></i><span class="sidebar-text">Profile</span></a></li>
+                <li><a href="routine.jsp"><i class="fas fa-calendar-day"></i><span class="sidebar-text">Your Daily Routine</span></a></li>
+                <li><a href="skincare.jsp"><i class="fas fa-spa"></i></i><span class="sidebar-text">Skincare</span></a></li>
+                <li><a href="haircare.jsp"><i class="fas fa-user-tie"></i><span class="sidebar-text">Haircare</span></a></li>
+                <li><a href="habits.jsp"><i class="fas fa-heartbeat"></i><span class="sidebar-text">Track Your Habits</span></a></li>
+                <li><a href="todo.jsp"><i class="fas fa-list"></i><span class="sidebar-text">Your To-Do List</span></a></li>
+                <li><a href="streak.jsp"><i class="fas fa-fire"></i><span class="sidebar-text">Your Streak</span></a></li>
+                <li><a href="rewards.jsp"><i class="fas fa-trophy"></i><span class="sidebar-text">Your Rewards</span></a></li>
+                <li><a href="logout.jsp" class="logout-btn"><i class="fas fa-sign-out-alt"></i><span class="sidebar-text">Logout</span></a></li>
+            </ul>
+        </nav>
+    </aside>
     <div class="container">
         <div class="header">
             <img src="images/haircareques.jpg" alt="Skincare">

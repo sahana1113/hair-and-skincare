@@ -32,9 +32,10 @@
             border-radius: 20px;
             box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
             width: 100%;
-            max-width: 400px;
+            max-width: 600px;
+            height:100%;
             animation: fadeIn 0.3s ease-in;
-            margin-top: 5rem; /* Adjusted margin for better positioning */
+            margin-top: 15rem; /* Adjusted margin for better positioning */
         }
 
         h1 {

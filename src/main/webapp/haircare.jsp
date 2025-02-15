@@ -1,33 +1,39 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="com.dao.HairDao, com.pojo.HairDetails" %>
-<%@ page import="java.util.List" %>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Haircare Details</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-      * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-a {
-    text-decoration: none;
-    color: #444;
-}
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
+        :root {
+            --pastel-pink: #ffd6e0;
+            --pastel-blue: #c5e4e7;
+            --pastel-purple: #e6e6fa;
+            --pastel-green: #d4e6d4;
+            --text-primary: #4a5568;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding-left: 70px;
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--pastel-blue) 0%, var(--pastel-pink) 100%);
+            color: var(--text-primary);
+        }
+
+        /* Sidebar Styles */
         .sidebar {
             width: 70px;
             background-color: rgba(49,85,100,0.9);
-            color: #ffffff;
-            padding: 20px 10px;
             position: fixed;
             height: 100%;
             top: 0;
@@ -37,20 +43,24 @@ a {
             z-index: 100;
         }
 
-        .sidebar-header {
-            text-align: center;
-            padding: 20px;
-            font-size: 1.8rem;
-            opacity: 0;
-            transition: opacity 0.3s ease;
+        .sidebar:hover {
+            width: 250px;
         }
-        .sidebar-header a {
-            text-decoration: none;
-            color: white;
+
+        .sidebar-header {
+            padding: 20px;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.3s;
         }
 
         .sidebar:hover .sidebar-header {
             opacity: 1;
+        }
+
+        .sidebar-header h2 a {
+            color: white;
+            text-decoration: none;
         }
 
         .sidebar-nav ul {
@@ -58,50 +68,122 @@ a {
             margin-top: 20px;
         }
 
-        .sidebar-nav li {
-            margin: 20px 0;
-        }
-
         .sidebar-nav li a {
-            color: #ffffff;
-            font-size: 1.5rem;
-            padding: 10px;
+            color: white;
+            padding: 15px;
             display: flex;
             align-items: center;
-            transition: background-color 0.3s ease, padding-left 0.3s ease;
-        }
-
-        .sidebar-nav li a i {
-            margin-right: 10px;
-        }
-
-        .sidebar-nav li a .sidebar-text {
-            display: none;
-            margin-left: 10px;
-            font-size: 1rem;
-        }
-
-        .sidebar:hover {
-            width: 250px;
-            background-color: #2e4c5a;
-        }
-
-        .sidebar:hover .sidebar-nav li a .sidebar-text {
-            display: inline;
+            text-decoration: none;
+            transition: 0.3s;
         }
 
         .sidebar-nav li a:hover {
-            padding-left: 20px;
-            background-color: #87c9c8;
-            color: black;
+            background-color: var(--pastel-blue);
+            color: var(--text-primary);
+        }
+
+        .sidebar-nav li a i {
+            font-size: 1.2rem;
+            min-width: 35px;
+        }
+
+        .sidebar-text {
+            display: none;
+        }
+
+        .sidebar:hover .sidebar-text {
+            display: inline;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 4px 15px var(--shadow);
+            transition: transform 0.3s;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+        }
+
+        h1 {
+            grid-column: 1 / -1;
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: var(--text-primary);
+        }
+
+        h2 {
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--pastel-blue);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        li {
+            padding: 0.8rem;
+            margin: 0.5rem 0;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 8px;
+            border-left: 4px solid var(--pastel-blue);
+        }
+
+        button {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--pastel-blue), var(--pastel-purple));
+            border: none;
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px var(--shadow);
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--pastel-blue);
+        }
+
+        th {
+            background: var(--pastel-blue);
         }
 
         .logout-btn {
-            margin-top: 30px;
             background-color: #e74c3c;
-            color: white;
-            text-align: center;
-            padding: 10px;
+            margin-top: 30px;
             border-radius: 5px;
         }
 
@@ -109,206 +191,75 @@ a {
             background-color: #c0392b;
         }
 
-        .container {
-            margin-left: 220px;
-            padding: 20px;
-        }
-
-        h1 {
-            text-align: center;
-            color: #333333;
-        }
-
-        .section {
-            margin-bottom: 20px;
-        }
-
-        button {
-            padding: 10px 20px;
-            background-color: #3498db;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #2980b9;
-        }
-
-        .table-container {
-            margin-top: 20px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 10px 0;
-        }
-
-        th, td {
-            text-align: left;
-            padding: 10px;
-            border: 1px solid #ddd;
-        }
-
-        th {
-            background-color: #f2f2f2;
-        }
-
         @media (max-width: 768px) {
-            .sidebar {
-                width: 200px;
-            }
-
             .container {
-                margin-left: 0;
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Sidebar -->
     <aside class="sidebar">
         <div class="sidebar-header">
-            <h2><a href="dashboard.jsp">Dashboard</a></h2>
+            <h2><a href="#">Dashboard</a></h2>
         </div>
         <nav class="sidebar-nav">
             <ul>
-                <li><a href="profile.jsp"><i class="fas fa-user"></i><span class="sidebar-text">Profile</span></a></li>
-                <li><a href="routine.jsp"><i class="fas fa-calendar-day"></i><span class="sidebar-text">Your Daily Routine</span></a></li>
-                <li><a href="skincare.jsp"><i class="fas fa-spa"></i><span class="sidebar-text">Skincare</span></a></li>
-                <li><a href="haircare.jsp"><i class="fas fa-user-tie"></i><span class="sidebar-text">Haircare</span></a></li>
-                <li><a href="habits.jsp"><i class="fas fa-heartbeat"></i><span class="sidebar-text">Track Your Habits</span></a></li>
-                <li><a href="todo.jsp"><i class="fas fa-list"></i><span class="sidebar-text">Your To-Do List</span></a></li>
-                <li><a href="streak.jsp"><i class="fas fa-fire"></i><span class="sidebar-text">Your Streak</span></a></li>
-                <li><a href="rewards.jsp"><i class="fas fa-trophy"></i><span class="sidebar-text">Your Rewards</span></a></li>
-                <li><a href="logout.jsp" class="logout-btn"><i class="fas fa-sign-out-alt"></i><span class="sidebar-text">Logout</span></a></li>
+                <li><a href="#"><i class="fas fa-user"></i><span class="sidebar-text">Profile</span></a></li>
+                <li><a href="#"><i class="fas fa-calendar-day"></i><span class="sidebar-text">Daily Routine</span></a></li>
+                <li><a href="#"><i class="fas fa-spa"></i><span class="sidebar-text">Skincare</span></a></li>
+                <li><a href="#"><i class="fas fa-user-tie"></i><span class="sidebar-text">Haircare</span></a></li>
+                <li><a href="#"><i class="fas fa-heartbeat"></i><span class="sidebar-text">Track Habits</span></a></li>
+                <li><a href="#"><i class="fas fa-list"></i><span class="sidebar-text">To-Do List</span></a></li>
+                <li><a href="#"><i class="fas fa-fire"></i><span class="sidebar-text">Streak</span></a></li>
+                <li><a href="#"><i class="fas fa-trophy"></i><span class="sidebar-text">Rewards</span></a></li>
+                <li><a href="#" class="logout-btn"><i class="fas fa-sign-out-alt"></i><span class="sidebar-text">Logout</span></a></li>
             </ul>
         </nav>
     </aside>
 
-    <!-- Main Content -->
     <div class="container">
         <h1>Haircare Details</h1>
-
-        <%
-            String userId = (String) session.getAttribute("user_id");
-            HairDao hairDao = new HairDao();
-            HairDetails hairDetails = hairDao.getHairDetailsByUserId(userId);
-
-            if (hairDetails != null) {
-        %>
+        
         <div class="section">
             <h2>Current Routine (AI Recommendation)</h2>
             <ul>
-                <% 
-                    List<String> aiRoutine = hairDetails.getCurrentProducts();
-                    if (aiRoutine != null && !aiRoutine.isEmpty()) {
-                        for (String step : aiRoutine) { 
-                %>
-                    <li><%= step %></li>
-                <% 
-                        }
-                    } else { 
-                %>
-                    <li>No AI recommendation available.</li>
-                <% } %>
+                <li>Sulfate-free shampoo twice a week</li>
+                <li>Deep conditioning treatment weekly</li>
+                <li>Leave-in conditioner after wash</li>
             </ul>
         </div>
 
         <div class="section">
-            <div>
             <h2>Hair Type Details</h2>
-            <p><strong>Hair Type:</strong> <%= hairDetails.getHairType() != null ? hairDetails.getHairType() : "Not provided" %></p>
-            <p><strong>Hair Length:</strong> <%= hairDetails.getHairLength() != null ? hairDetails.getHairLength() : "Not provided" %></p>
-            <p><strong>Hair Texture:</strong> <%= hairDetails.getHairTexture() != null ? hairDetails.getHairTexture() : "Not provided" %></p>
+            <p><strong>Hair Type:</strong> Type 2B</p>
+            <p><strong>Hair Length:</strong> Medium</p>
+            <p><strong>Hair Texture:</strong> Fine</p>
         </div>
 
-        <div>
+        <div class="section">
             <h2>Concerns</h2>
             <h3>Hair Concerns</h3>
             <ul>
-                <% 
-                    List<String> hairConcerns = hairDetails.getHairConcerns();
-                    if (hairConcerns != null && !hairConcerns.isEmpty()) {
-                        for (String concern : hairConcerns) { 
-                %>
-                    <li><%= concern %></li>
-                <% 
-                        }
-                    } else { 
-                %>
-                    <li>No concerns available</li>
-                <% } %>
+                <li>Split ends</li>
+                <li>Frizz</li>
+                <li>Lack of volume</li>
             </ul>
             <h3>Scalp Concerns</h3>
             <ul>
-                <% 
-                    List<String> scalpConcerns = hairDetails.getScalpConcerns();
-                    if (scalpConcerns != null && !scalpConcerns.isEmpty()) {
-                        for (String concern : scalpConcerns) { 
-                %>
-                    <li><%= concern %></li>
-                <% 
-                        }
-                    } else { 
-                %>
-                    <li>No concerns available</li>
-                <% } %>
+                <li>Dryness</li>
+                <li>Occasional itchiness</li>
             </ul>
         </div>
 
-        <div>
-            <h2>Goals</h2>
-            <p><strong>Growth Goals:</strong> <%= hairDetails.getGrowthGoals() != null ? hairDetails.getGrowthGoals() : "Not provided" %></p>
-        </div>
-
-        <div>
-            <h2>Current Routine</h2>
-            <p><strong>Wash Frequency:</strong> <%= hairDetails.getWashFrequency() != null ? hairDetails.getWashFrequency() : "Not provided" %></p>
-            <h3>Products Used:</h3>
-            <ul>
-                <% 
-                    List<String> products = hairDetails.getCurrentProducts();
-                    if (products != null && !products.isEmpty()) {
-                        for (String product : products) { 
-                %>
-                    <li><%= product %></li>
-                <% 
-                        }
-                    } else { 
-                %>
-                    <li>No products listed</li>
-                <% } %>
-            </ul>
-        </div>
-
-        <div>
-            <h2>Allergies</h2>
-            <p><strong>Natural Product Preference:</strong> <%= hairDetails.getNaturalProductPreference().equals("true") ? "Yes" : "No" %></p>
-            <h3>Allergy Details:</h3>
-            <ul>
-                <% 
-                    List<String> allergies = hairDetails.getAllergies();
-                    if (allergies != null && !allergies.isEmpty()) {
-                        for (String allergy : allergies) { 
-                %>
-                    <li><%= allergy %></li>
-                <% 
-                        }
-                    } else { 
-                %>
-                    <li>No allergies listed</li>
-                <% } %>
-            </ul>
-        </div>
         <div class="section">
-            <h2>Generate a New Recommendation</h2>
-            <form action="haircare_question.jsp" method="post">
-                <input type="hidden" name="user_id" value="<%= userId %>">
-                <button type="submit">Generate New Recommendation</button>
-            </form>
+            <h2>Goals</h2>
+            <p><strong>Growth Goals:</strong> 6 inches in 12 months</p>
+        </div>
+
+        <div class="section">
+            <h2>Generate New Recommendation</h2>
+            <button type="submit">Generate New Recommendation</button>
         </div>
 
         <div class="section">
@@ -322,31 +273,18 @@ a {
                         </tr>
                     </thead>
                     <tbody>
-                        <% 
-                            List<String> pastRecommendations = null; 
-                            if (pastRecommendations != null && !pastRecommendations.isEmpty()) {
-                                for (String recommendation : pastRecommendations) { 
-                        %>
                         <tr>
                             <td>2025-01-20</td>
-                            <td><%= recommendation %></td>
+                            <td>Weekly protein treatment added</td>
                         </tr>
-                        <% 
-                                }
-                            } else { 
-                        %>
                         <tr>
-                            <td colspan="2">No past recommendations found.</td>
+                            <td>2025-01-13</td>
+                            <td>Scalp massage routine introduced</td>
                         </tr>
-                        <% } %>
                     </tbody>
                 </table>
             </div>
         </div>
-
-        <% } else { %>
-            <p>No haircare details found for the user with ID <%= userId %>.</p>
-        <% } %>
     </div>
 </body>
 </html>

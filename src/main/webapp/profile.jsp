@@ -20,7 +20,174 @@
     text-decoration: none;
     color: #444;
 }
-.sidebar {
+/* Base styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #e6f7f6 0%, #fff2f1 100%);
+    background-attachment: fixed;
+    color: #333;
+    padding-left: 70px;
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+}
+
+/* Content Layout */
+.content {
+    flex: 1;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.profile-container {
+    max-width: 1000px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    padding: 3rem;
+    backdrop-filter: blur(8px);
+    margin: 2rem auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    min-height: calc(100vh - 4rem);
+}
+
+/* Profile Photo Section */
+.profile-photo {
+    text-align: center;
+    position: relative;
+    padding: 2rem 0;
+}
+
+#profile-img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 8px solid #fff;
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.15);
+    object-fit: cover;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#profile-img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 30px rgba(135, 201, 200, 0.3);
+}
+
+/* Form Layout */
+form {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    align-content: start;
+}
+
+.form-group {
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.8rem;
+    color: #555;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="number"],
+select {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid rgba(135, 201, 200, 0.3);
+    border-radius: 12px;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.9);
+}
+
+/* Button Styling */
+.update-btn {
+    grid-column: 1 / -1;
+    padding: 1.2rem;
+    background: linear-gradient(135deg, #87c9c8 0%, #6ab7b6 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.update-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(135, 201, 200, 0.4);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .profile-container {
+        margin: 1rem;
+        padding: 1.5rem;
+        gap: 1.5rem;
+    }
+    
+    form {
+        grid-template-columns: 1fr;
+    }
+    
+    #profile-img {
+        width: 150px;
+        height: 150px;
+    }
+    
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+}
+
+/* Animation for content load */
+.profile-container {
+    animation: slideUp 0.6s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Decorative elements */
+.profile-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 200px;
+    background: linear-gradient(135deg, #87c9c8 0%, #6ab7b6 100%);
+    opacity: 0.1;
+    border-radius: 20px 20px 0 0;
+    z-index: -1;
+}.sidebar {
     width: 70px; /* Initially narrow */
     background-color: rgba(49,85,100,0.9); /* Darker shade of blue */
     color: #ffffff; /* White text for better contrast */
@@ -115,84 +282,29 @@
 .logout-btn:hover {
     background-color: #c0392b;
 }
-        
-        /* Add additional styles for the profile page below */
-
-        .profile-container {
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            max-width: 800px;
-            margin: auto;
-            margin-top: 50px;
-        }
-
-        .profile-photo img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            object-fit: cover;
+.sidebar h2 {
+            color: #856c6c;
             margin-bottom: 20px;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        .form-group label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        .form-group input, .form-group select {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        .update-btn {
-            background-color: #87c9c8;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .update-btn:hover {
-            background-color: #2980b9;
-            transform: scale(1.05);
-        }
-        @keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+            font-size: 1.8rem;
+            border-bottom: 2px solid #f3d7d7;
+            padding-bottom: 10px;
 }
 
-/* Responsive Layout */
-@media (max-width: 768px) {
-    .sidebar {
-        width: 200px;
-    }
 
-    .content {
-        margin-left: 0;
-    }
+        .content {
+            margin-left: 80px;
+            flex-grow: 1;
+            padding: 20px;
+            transition: margin-left 0.3s ease;
+        }
 
-    .main-content {
-        grid-template-columns: 1fr;
-    }
-}
+        .sidebar:hover ~ .content {
+            margin-left: 250px;
+        }
+
     </style>
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
 </head>
 <body>
     <!-- Sidebar Section -->
@@ -228,7 +340,6 @@
             <!-- Profile Picture -->
             <div class="profile-photo text-center">
                 <img src="images/girluser1.jpg" alt="Profile Picture" id="profile-img">
-                <input type="file" id="profile-upload" accept="image/*" onchange="previewProfilePicture(event)">
             </div>
 
             <!-- User Details Form -->
@@ -265,12 +376,5 @@
             </form>
         </div>
     </div>
-
-    <script>
-        function previewProfilePicture(event) {
-            const img = document.getElementById('profile-img');
-            img.src = URL.createObjectURL(event.target.files[0]);
-        }
-    </script>
 </body>
 </html>

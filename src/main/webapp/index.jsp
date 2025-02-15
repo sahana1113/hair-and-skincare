@@ -27,15 +27,6 @@
             overflow: hidden;
         }
 
-/*         .container {
-            text-align: center;
-            background: #d6eef5; 
-            padding: 3rem 4rem;
-            border-radius: 20px;
-            box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.15);
-            width: 60%; 
-            animation: slideIn 1.2s ease-out; 
-        } */
         .container {
     text-align: center;
     background: rgba(255, 250, 240, 0.9); /* Pastel cream with slight transparency */
@@ -127,7 +118,7 @@
         <p>Your journey to glowing skin and healthy hair starts here!</p>
         
         <div class="button-group">
-            <p>New to Care Craft? Let's get you started:</p>
+            <p>New to Personalized Palette? Let's get you started:</p>
             <a href="register.jsp">
                 <button>Register Now</button>
             </a>

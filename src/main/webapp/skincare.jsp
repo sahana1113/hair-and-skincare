@@ -7,21 +7,23 @@
     <meta charset="UTF-8">
     <title>Skincare Details</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
+ * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
-        * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #fff5e6, #f8f9d2);
+            color: #315564;
+            min-height: 100vh;
+            display: flex;
+        }
 a {
     text-decoration: none;
     color: #444;
 }
+
 /* Sidebar Styles */
 .sidebar {
     width: 70px; /* Initially narrow */
@@ -118,68 +120,162 @@ a {
     background-color: #c0392b;
 }
         .container {
-            margin-left: 220px;
+            margin-left: 80px;
+            flex-grow: 1;
             padding: 20px;
+            transition: margin-left 0.3s ease;
         }
+
+        .sidebar:hover ~ .container {
+            margin-left: 250px;
+        }
+
         h1 {
+            color: #856c6c;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
             text-align: center;
-            color: #333333;
         }
+
         .section {
+            background-color: #fff;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+        }
+
+      .header {
+            background-color: #90c9c8;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            color: #315564;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
             margin-bottom: 20px;
         }
+
+        .section {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid #f59caa;
+        }
+
+        .section h2 {
+            color: #315564;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #90c9c8;
+        }
+
+        .section ul {
+            list-style: none;
+        }
+
+        .section li {
+            padding: 10px;
+            margin: 5px 0;
+            background: rgba(144, 201, 200, 0.1);
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+
+        .section li:hover {
+            background: rgba(245, 156, 170, 0.1);
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-number {
+            font-size: 1.8em;
+            color: #f59caa;
+            margin: 5px 0;
+        }
+
         button {
-            padding: 10px 20px;
-            background-color: #3498db;
+            background-color: #90c9c8;
             color: white;
             border: none;
-            border-radius: 5px;
+            padding: 12px 25px;
+            border-radius: 8px;
             cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
         }
+
         button:hover {
-            background-color: #2980b9;
+            background-color: #f59caa;
+            transform: scale(1.05);
         }
-        .table-container {
-            margin-top: 20px;
-        }
+
         table {
             width: 100%;
             border-collapse: collapse;
-            margin: 10px 0;
+            margin-top: 15px;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
         }
+
         th, td {
+            padding: 12px 15px;
             text-align: left;
-            padding: 10px;
-            border: 1px solid #ddd;
+            border-bottom: 1px solid #90c9c8;
         }
+
         th {
-            background-color: #f2f2f2;
+            background-color: #90c9c8;
+            color: white;
         }
-        @keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
 
-/* Responsive Layout */
-@media (max-width: 768px) {
-    .sidebar {
-        width: 200px;
-    }
+        tr:hover {
+            background-color: rgba(144, 201, 200, 0.1);
+        }
 
-    .content {
-        margin-left: 0;
-    }
-
-    .main-content {
-        grid-template-columns: 1fr;
-    }
-}
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 10px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
     </style>
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
@@ -207,8 +303,10 @@ a {
 
     <!-- Main Content -->
     <div class="container">
-        <h1>Skincare Details</h1>
-
+        <div class="header">
+            <h1>Your Skincare Journey</h1>
+            <p>Track and optimize your skincare routine for better results</p>
+        </div>
         <%
             // Retrieve user ID from session
             String userId = (String) session.getAttribute("user_id");
@@ -218,7 +316,9 @@ a {
             if (skinDetails != null) {
         %>
         <!-- Current Routine Based on AI Recommendation -->
-        <div class="section">
+        <div class="content-grid">
+            <div class="section">
+                <h2><i class="fas fa-robot"></i> AI Recommendation</h2>
             <h2>Current Routine (AI Recommendation)</h2>
             <ul>
                 <% 
@@ -238,30 +338,31 @@ a {
 
         <!-- Skincare Details -->
         <div class="section">
-            <h2>Your Skincare Details</h2>
-               <p><strong>Skin Type:</strong> <%= skinDetails.getSkinType() != null ? skinDetails.getSkinType() : "Not provided" %></p>
-        </div>
-
-        <div class="section">
-            <h2>Skin Concerns</h2>
-            <ul>
-                <% 
+                            <h2><i class="fas fa-info-circle"></i> Skin Profile</h2>
+                            <ul>
+                    <li><strong>Skin Type:</strong>  <%= skinDetails.getSkinType() != null ? skinDetails.getSkinType() : "Not provided" %></li>
+                    <li><strong>Main Concerns:</strong>                 <% 
                     List<String> concerns = skinDetails.getSkinConcerns();
                     if (concerns != null && !concerns.isEmpty()) {
                         for (String concern : concerns) { 
                 %>
-                    <li><%= concern %></li>
+                    <%= concern %>,
                 <% 
                         }
                     } else { 
                 %>
                     <li>No concerns available</li>
-                <% } %>
-            </ul>
+                <% } %></li>
+                    <li><strong>Sensitivity Level:</strong> Moderate</li>
+                    <li><strong>Current Status:</strong> Improving</li>
+                </ul>
+            </div>
+
+
         </div>
 
-        <div class="section">
-            <h2>Goals</h2>
+         <div class="section">
+                <h2><i class="fas fa-bullseye"></i> Goals</h2>
             <ul>
                 <% 
                     List<String> goals = skinDetails.getGoals();
@@ -279,7 +380,7 @@ a {
         </div>
 
         <div class="section">
-            <h2>Current Routine</h2>
+                <h2><i class="fas fa-clock"></i> Current Routine</h2>
             <p><strong>Frequency:</strong> <%= skinDetails.getSkincareFrequency() != null ? skinDetails.getSkincareFrequency() : "Not provided" %></p>
             <ul>
                 <% 

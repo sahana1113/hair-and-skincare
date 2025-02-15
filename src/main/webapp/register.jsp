@@ -33,7 +33,7 @@
             box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
             width: 100%;
             max-width: 700px;
-            margin-top: 2rem; /* Reduced margin */
+            margin-top: 7rem; /* Reduced margin */
             animation: fadeIn 0.5s ease-in-out;
         }
 
