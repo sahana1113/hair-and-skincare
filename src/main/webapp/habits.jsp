@@ -241,9 +241,10 @@ html, body {
 .reflection {
     margin: 0;
     background: white;
-    padding: 25px;
+    padding: 100px 100px; /* Increased padding for more space */
     border-radius: 15px;
 }
+
 
 .reflection h3 {
     color: #5d4e6d;
