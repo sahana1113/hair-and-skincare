@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
+<%@ page import="com.dao.*" %>
 <%@ page import="com.pojo.*" %>
-
+<%@ page import="java.util.*" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -416,27 +417,28 @@ input[type="checkbox"]:checked::after {
                 <li><a href="todo.jsp"><i class="fas fa-list"></i><span class="sidebar-text">Your To-Do List</span></a></li>
                 <li><a href="streak.jsp"><i class="fas fa-fire"></i><span class="sidebar-text">Your Streak</span></a></li>
                 <li><a href="rewards.jsp"><i class="fas fa-trophy"></i><span class="sidebar-text">Your Rewards</span></a></li>
-                <li><a href="logout.jsp" class="logout-btn"><i class="fas fa-sign-out-alt"></i><span class="sidebar-text">Logout</span></a></li>
+                <li><a href="${pageContext.request.contextPath}/logout" class="logout-btn"><i class="fas fa-sign-out-alt"></i><span class="sidebar-text">Logout</span></a></li>
             </ul>
         </nav>
     </aside>
     <!-- Main Content Section -->
     <div class="content">
-       <!--  <header class="header">
-            <h1>Welcome, [User Name]</h1>
-            <p>Your daily routine, progress, and rewards are here!</p>
-        </header> -->
          <%
     UserDetails user = (UserDetails) session.getAttribute("user");
     if (user == null) {
         response.sendRedirect("login.jsp"); // Redirect to login if user is not found
         return;
-    }
+    }String userId = (String) session.getAttribute("user_id");
+    HabitDao hdao=new HabitDao();
+    List<Habits> habits = hdao.getHabitsByUserId(userId);
+    TodoDao dao=new TodoDao();
+    List<Todo> todos = dao.getTodosByUserId(userId);
+
     %>
 
         <main class="main-content">
             <!-- Profile & Goals Section -->
-            <section id="profile" class="profile-goals">
+            <section id="profile" class="profile-goals" onclick="window.location.href='profile.jsp';" style="cursor: pointer;">
 				<div class="profile-info">
 					<!-- Profile Picture -->
 					<div class="profile-photo">
@@ -448,53 +450,82 @@ input[type="checkbox"]:checked::after {
 								big changes tomorrow. Glow, grow, and thrive in every way."</p>
 						</div>
 						<!-- Update Profile Details Button -->
-						<button id="update-profile-btn" class="update-btn"
-							onclick="openModal()">Revise Profile</button>
+						<a href="profile.jsp">
+  <button id="update-profile-btn" class="update-btn">Revise Profile</button>
+</a>
 					</div>
 				</div>
 			</section>
 
             <!-- Routine Overview Section -->
-            <section id="routine" class="routine-overview">
+            <section id="routine" class="routine-overview" onclick="window.location.href='routine.jsp';" style="cursor: pointer;">
                 <h2>Your Daily Routine</h2>
                 <div class="routine-tasks">
                     <h3>Skincare Routine:</h3>
                     <ul>
-                        <li><input type="checkbox" id="morning-skincare"> Morning Skincare</li>
-                        <li><input type="checkbox" id="night-skincare"> Night Skincare</li>
+                        <li>Morning Skincare</li>
+                        <li> Night Skincare</li>
                     </ul>
                 </div>
-                <button class="generate-recommendations" onclick="generateSkincareRecommendations()">View</button>
+<a href="routine.jsp?tab=skin">
+  <button class="generate-recommendations">View</button>
+</a>
                 <div class="routine-tasks">
                     <h3>Haircare Routine:</h3>
                     <ul>
-                        <li><input type="checkbox" id="haircare"> Haircare Routine</li>
+                        <li>Weekly Routine</li>
                     </ul>
                 </div>
-                <button class="generate-recommendations" onclick="generateHaircareRecommendations()">View</button>
+               <a href="routine.jsp?tab=hair">
+  <button class="generate-recommendations">View</button>
+</a>
+               
             </section>
 
             <!-- Habits Tracker Section -->
-            <section id="habits" class="habits-tracker">
+            <section id="habits" class="habits-tracker" onclick="window.location.href='habits.jsp';" style="cursor: pointer;">
                 <h2>Track Your Habits</h2>
                 <ul>
-                    <li><input type="checkbox" id="water-intake"> Drink 8 glasses of water</li>
-                    <li><input type="checkbox" id="sleep"> Sleep 8 hours</li>
-                    <li><input type="checkbox" id="exercise"> Exercise</li>
+                <% if (habits != null && !habits.isEmpty()) {
+                	for (Habits habit : habits) {
+                    String habitName = habit.getHabitName();
+                    int habitId = habit.getHabitId();
+            %>
+                    <li><%= habitName %></li>
+                 <% } %>
                 </ul>
+             <%    } else { %>
+                    <p>No habits created yet<p>
+                <% } %>
+                <a href="habits.jsp">
+                <button class="view-btn">Manage Habits</button>
+            </a>
+                
             </section>
 
             <!-- To-Do List Section -->
-            <section id="todo" class="to-do-list">
+            <section id="todo" class="to-do-list" onclick="window.location.href='todo.jsp';" style="cursor: pointer;">
                 <h2>Your To-Do List</h2>
                 <ul>
-                    <li><input type="checkbox" id="buy-shampoo"> Buy New Shampoo</li>
-                    <li><input type="checkbox" id="consult-dermatologist"> Consult Dermatologist</li>
+                <% if (todos != null && !todos.isEmpty()) { 
+                for (int i=0;i<todos.size();i++) {
+                        String todoName =todos.get(i).getTaskName();
+                        int todoId = todos.get(i).getTodoId();
+                %>
+                    <li><%= todoName %></li>
+                    <% } 
+                } else { %>
+                    <p>No tasks added yet<p>
+                <% } %>
+            </ul>
+            <a href="todo.jsp">
+                <button class="view-btn">Manage Tasks</button>
+            </a>
                 </ul>
             </section>
 
             <!-- Streak Tracker Section -->
-            <section id="streak" class="streak-tracker">
+            <section id="streak" class="streak-tracker" onclick="window.location.href='streak.jsp';" style="cursor: pointer;">
                 <h2>Your Streak</h2>
                 <div class="streak">
                 <p>Current Streak: <span id="current-streak">5</span> days</p>
@@ -505,49 +536,24 @@ input[type="checkbox"]:checked::after {
             </section>
 
             <!-- Rewards Section -->
-            <section id="rewards" class="rewards">
+            <section id="rewards" class="rewards" onclick="window.location.href='rewards.jsp';" style="cursor: pointer;">
                 <h2>Your Rewards</h2>
                 <div class="reward">
-                    <p>Earned: Skincare Tips Badge</p>
+                    <p>Earned: Early Bird</p>
                 </div>
                 <div class="reward">
-                    <p>Earned: Haircare Expert Badge</p>
+                    <p>Earned: Consistency</p>
                 </div>
             </section>
         </main>
     </div>
 
-    <!-- Modal for Skincare Recommendations (Example) -->
-    <div id="recommendation-modal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeModal()">&times;</span>
-            <h2>Skincare Recommendations</h2>
-            <ul>
-                <li>Product 1: Moisturizer</li>
-                <li>Product 2: Cleanser</li>
-                <li>Product 3: Sunscreen</li>
-            </ul>
-        </div>
-    </div>
-
-    <!-- Modal for Haircare Recommendations (Example) -->
-    <div id="haircare-modal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeModal()">&times;</span>
-            <h2>Haircare Recommendations</h2>
-            <ul>
-                <li>Product 1: Shampoo</li>
-                <li>Product 2: Conditioner</li>
-                <li>Product 3: Hair Oil</li>
-            </ul>
-        </div>
-    </div>
     <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
 <script type="module">
 	import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
 
 createChat({
-	webhookUrl: 'https://trialadminai.app.n8n.cloud/webhook/cf842d52-e93a-41b0-90fb-a2b81bd8b24e/chat',
+	webhookUrl: 'https://trialaccountaii.app.n8n.cloud/webhook/cf842d52-e93a-41b0-90fb-a2b81bd8b24e/chat',
 	webhookConfig: {
 		method: 'POST',
 		headers: {}
@@ -566,21 +572,5 @@ createChat({
 });
 
 </script>
-
-    <script>
-    
-        function generateSkincareRecommendations() {
-            document.getElementById('recommendation-modal').style.display = 'block';
-        }
-
-        function generateHaircareRecommendations() {
-            document.getElementById('haircare-modal').style.display = 'block';
-        }
-
-        function closeModal() {
-            document.getElementById('recommendation-modal').style.display = 'none';
-            document.getElementById('haircare-modal').style.display = 'none';
-        }
-    </script>
 </body>
 </html>

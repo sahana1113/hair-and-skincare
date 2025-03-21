@@ -5,8 +5,11 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneOffset;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -31,11 +34,11 @@ public class CreateTodoServlet extends HttpServlet {
         String dueDate = request.getParameter("dueDate");
         String status = request.getParameter("status");
         String userId = ((String) request.getSession().getAttribute("user_id"));
-        
+
         Todo todo=new Todo();
         todo.setTaskName(taskName);
         todo.setTaskDescription(taskDescription);
-        todo.setDueDate(LocalDate.parse(dueDate).atStartOfDay(ZoneOffset.UTC).toEpochSecond());
+        todo.setDueDate(java.sql.Date.valueOf(dueDate));
         todo.setUserId(userId);
         todo.setStatus(status);
 
@@ -43,7 +46,7 @@ public class CreateTodoServlet extends HttpServlet {
         boolean isInserted;
 		isInserted = dao.insertTodoData(todo);
 		if (isInserted) {
-			response.sendRedirect("dashboard.jsp");
+			response.sendRedirect("todo.jsp");
 		} else {
 			request.setAttribute("errorMessage", "Registration failed. Please try again.");
 			request.getRequestDispatcher("habitCreation.jsp").forward(request, response);

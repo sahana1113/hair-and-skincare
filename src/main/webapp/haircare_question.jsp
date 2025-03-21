@@ -384,7 +384,7 @@ body {
                 <li><a href="todo.jsp"><i class="fas fa-list"></i><span class="sidebar-text">Your To-Do List</span></a></li>
                 <li><a href="streak.jsp"><i class="fas fa-fire"></i><span class="sidebar-text">Your Streak</span></a></li>
                 <li><a href="rewards.jsp"><i class="fas fa-trophy"></i><span class="sidebar-text">Your Rewards</span></a></li>
-                <li><a href="logout.jsp" class="logout-btn"><i class="fas fa-sign-out-alt"></i><span class="sidebar-text">Logout</span></a></li>
+                <li><a href="${pageContext.request.contextPath}/logout" class="logout-btn"><i class="fas fa-sign-out-alt"></i><span class="sidebar-text">Logout</span></a></li>
             </ul>
         </nav>
     </aside>
@@ -409,20 +409,16 @@ body {
             { field: "hair_concern", text: "What is your primary hair concern?", options: ["Hair fall or thinning", "Dryness or frizziness", "Dandruff", "Oily scalp", "Split ends", "None", "Other"], multiple: true },
             { field: "hair_type", text: "What is your hair type?", options: ["Straight", "Wavy", "Curly", "Coily", "Unsure"], multiple: false },
             { field: "hair_length", text: "What is your hair length?", options: ["Short", "Medium", "Long"], multiple: false },
-            { field: "hair_texture", text: "How would you describe your hair texture?", options: ["Fine", "Medium", "Thick"], multiple: false },
             { field: "scalp_concern", text: "Do you have any specific scalp concerns?", options: ["Itchy scalp", "Dry scalp", "Oily scalp", "Sensitive scalp", "None"], multiple: true },
             { field: "wash_frequency", text: "How frequently do you wash your hair?", options: ["Daily", "Every 2-3 days", "Once a week","Other"], multiple: false },
             { field: "current_products", text: "What type of haircare products do you currently use?", options: ["Shampoo", "Conditioner", "Hair mask", "Hair oil", "Leave-in conditioner", "None"], multiple: true },
-            { field: "styling_tools", text: "Do you use heat styling tools?", options: ["Frequently", "Occasionally", "Rarely", "Never"], multiple: false },
             { field: "chemical_treatments", text: "Have you chemically treated your hair?", options: ["Yes I have", "No"], multiple: true },
             { field: "seasonal_effects", text: "Do you notice seasonal changes in your hair condition?", options: ["Yes, worsens in winter", "Yes, worsens in summer", "No seasonal changes"], multiple: false },
-            { field: "diet", text: "Do you follow a specific diet that affects your hair?", options: ["Balanced diet", "Vegetarian or vegan", "Low protein", "Other"], multiple: false },
-            { field: "water_intake", text: "How much water do you drink daily?", options: ["Less than 1 liter", "1-2 liters", "More than 2 liters"], multiple: false },
             { field: "stress_level", text: "How much stress do you experience regularly?", options: ["High", "Moderate", "Low"], multiple: false },
             { field: "growth_goals", text: "Do you have a hair growth goal?", options: ["Yes, longer hair", "Yes, thicker hair", "No specific goal"], multiple: false },
             { field: "allergies", text: "Do you have any allergies?", options: ["Yes I have", "No", "Not sure"], multiple: true },
-            { field: "natural_products", text: "Do you prefer natural or organic haircare solutions?", options: ["Yes", "No preference"], multiple: false }
-
+            { field: "water_intake", text: "How much water do you drink daily?", options: ["Less than 1 liter", "1-2 liters", "More than 2 liters"], multiple: false }
+             
         ];
 
         let currentQuestionIndex = 0;
@@ -489,44 +485,44 @@ body {
             }
         }
 
-        function nextQuestion() {
-            const question = questions[currentQuestionIndex];
+		function nextQuestion() {
+		    const question = questions[currentQuestionIndex];
 
-            if (question.multiple) {
-                const selectedOptions = Array.from(document.querySelectorAll('.option-button.selected'))
-                    .map(button => button.textContent);
-                if (selectedOptions.length > 0) {
-                    answers[question.field] = selectedOptions;
-                }
-            } else {
-                const selectedButton = document.querySelector('.option-button.selected');
-                if (selectedButton) {
-                    answers[question.field] = selectedButton.textContent;
-                }
-            }
+		    if (question.multiple) {
+		        const selectedOptions = Array.from(document.querySelectorAll('.option-button.selected'))
+		            .map(button => button.textContent);
+		        if (selectedOptions.length > 0) {
+		            answers[question.field] = selectedOptions;
+		        }
+		    } else {
+		        const selectedButton = document.querySelector('.option-button.selected');
+		        if (selectedButton) {
+		            answers[question.field] = selectedButton.textContent;
+		        }
+		    }
 
-            if (document.getElementById("other-option-input").style.display === "block") {
-                const otherValue = document.getElementById("other-option-input").value;
-                if (otherValue) {
-                    if (question.multiple) {
-                        answers[question.field] = answers[question.field] || [];
-                        answers[question.field].push(otherValue);
-                    } else {
-                        answers[question.field] = otherValue;
-                    }
-                }
-            }
-            if (!question.multiple && Array.isArray(answers[question.field])) {
-                answers[question.field] = answers[question.field][0];
-            }
+		    if (document.getElementById("other-option-input").style.display === "block") {
+		        const otherValue = document.getElementById("other-option-input").value;
+		        if (otherValue) {
+		            if (question.multiple) {
+		                answers[question.field] = answers[question.field] || [];
+		                answers[question.field].push(otherValue);
+		            } else {
+		                answers[question.field] = otherValue;
+		            }
+		        }
+		    }
+		    if (!question.multiple && Array.isArray(answers[question.field])) {
+		        answers[question.field] = answers[question.field][0];
+		    }
 
-            currentQuestionIndex++;
-            if (currentQuestionIndex >= questions.length) {
-                submitAnswers();
-                return;
-            }
-            loadQuestion();
-        }
+		    currentQuestionIndex++;
+		    if (currentQuestionIndex >= questions.length) {
+		        submitAnswers();
+		        return;
+		    }
+		    loadQuestion();
+		}
 
         function goBack() {
             if (currentQuestionIndex > 0) {
@@ -546,7 +542,7 @@ body {
                 .then((response) => response.text())
                 .then((data) => {
                     alert("Your answers have been saved successfully!");
-                    window.location.href = "dashboard.jsp";
+                    window.location.href = "routine.jsp?tab=hair";
                 })
                 .catch((error) => {
                     console.error("Error submitting data:", error);

@@ -1,6 +1,7 @@
 package com.dao;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,7 +16,7 @@ import com.config.HikariCPDataSource;
 import com.pojo.UserDetails;
 
 public class UserDao {
-	public Connection getCon() throws SQLException {
+	public static Connection getCon() throws SQLException {
 		return HikariCPDataSource.getConnection();
 	}
 
@@ -74,5 +75,25 @@ public class UserDao {
 		}
 		return null;
 	}
+	
+	public static int updateUserDetails(UserDetails user)
+	{
+          String query = "UPDATE users SET username=?, usermail=?, phonenumber=?, age=?, gender=?, location=? WHERE user_id=?";
+          try (Connection con = getCon(); 
+  				PreparedStatement stmt = con.prepareStatement(query)) {
+          stmt.setString(1, user.getUsername());
+          stmt.setString(2, user.getUsermail());
+          stmt.setString(3, user.getPhoneNumber());
+          stmt.setLong(4, user.getAge());
+          stmt.setString(5, user.getGender());
+          stmt.setString(6, user.getLocation());
+          stmt.setInt(7, user.getUserId());
+
+          return stmt.executeUpdate();
+          } catch (SQLException e) {
+			e.printStackTrace();
+		}
+          return 0;
+     }
 
 }

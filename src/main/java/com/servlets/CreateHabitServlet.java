@@ -1,6 +1,7 @@
 package com.servlets;
 
 import java.io.IOException;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -36,14 +37,14 @@ public class CreateHabitServlet extends HttpServlet {
         habit.setHabitName(habitName);
         habit.setHabitDescription(habitDescription);
         habit.setFrequency(frequency);
-        habit.setStartDate(LocalDate.parse(startDate).atStartOfDay(ZoneOffset.UTC).toEpochSecond());
-        habit.setEndDate(LocalDate.parse(endDate).atStartOfDay(ZoneOffset.UTC).toEpochSecond());
+        habit.setStartDate(java.sql.Date.valueOf(startDate));
+        habit.setEndDate(java.sql.Date.valueOf(endDate));
         HabitDao dao=new HabitDao();
         boolean isInserted;
 		try {
 			isInserted = dao.insertHabitData(habit);
 			if (isInserted) {
-				response.sendRedirect("dashboard.jsp");
+				response.sendRedirect("habits.jsp");
 			} else {
 				request.setAttribute("errorMessage", "Registration failed. Please try again.");
 				request.getRequestDispatcher("habitCreation.jsp").forward(request, response);

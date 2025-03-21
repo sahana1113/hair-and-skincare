@@ -379,7 +379,7 @@ to {
 						class="sidebar-text">Your Streak</span></a></li>
 				<li><a href="rewards.jsp"><i class="fas fa-trophy"></i><span
 						class="sidebar-text">Your Rewards</span></a></li>
-				<li><a href="logout.jsp" class="logout-btn"><i
+				<li><a href="${pageContext.request.contextPath}/logout" class="logout-btn"><i
 						class="fas fa-sign-out-alt"></i><span class="sidebar-text">Logout</span></a></li>
 			</ul>
 		</nav>
@@ -411,9 +411,7 @@ to {
 	            { field: "allergies", text: "Do you have any known allergies or sensitivities to skincare ingredients?", options: ["Yes I have", "No", "Not sure"], multiple: true },
 	            { field: "sun_exposure", text: "How often are you exposed to the sun?", options: ["Rarely", "Occasionally", "Daily (with sunscreen)", "Daily (without sunscreen)"], multiple: false },
 	            { field: "skin_texture", text: "What is your skin texture like?", options: ["Smooth", "Rough or uneven", "Bumpy (e.g., small pimples or blackheads)", "Other"], multiple: false },
-	            { field: "regular_experiences", text: "Do you experience any of the following regularly? (Multiple selections allowed)", options: ["Excessive oiliness", "Flaking or peeling", "Itching or burning", "Tightness after cleansing", "None of the above"], multiple: true },
 	            { field: "water_intake", text: "How much water do you drink daily?", options: ["Less than 1 liter", "1 to 2 liters", "More than 2 liters"], multiple: false },
-	            { field: "product_preference", text: "Do you have a preference for skincare products?", options: ["Natural or organic", "Dermatologist-recommended", "Cruelty-free", "Fragrance-free", "Vegan", "No specific preference","Other"], multiple: true },
 	            { field: "skin_treatment", text: "Are you currently on any medication or treatment for your skin?", options: ["Yes I have", "No"], multiple: true }
 	        ];
 	
@@ -544,8 +542,7 @@ to {
 	            })
 	                .then((response) => response.text())
 	                .then((data) => {
-	                    alert("Your answers have been saved successfully!");
-	                    window.location.href = "dashboard.jsp"; // Navigate back to the select page
+	                    window.location.href = "routine.jap?tab=skin"; // Navigate back to the select page
 	                })
 	                .catch((error) => {
 	                    console.error("Error submitting data:", error);

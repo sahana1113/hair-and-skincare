@@ -1,13 +1,13 @@
 package com.pojo;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class HabitStreak {
     private int streakId;
     private int habitId;
     private int currentStreak;
     private int longestStreak;
-    private long lastCompleted;
+    private Date lastCompleted;
 
     // Getters and Setters
     public int getStreakId() {
@@ -42,11 +42,11 @@ public class HabitStreak {
         this.longestStreak = longestStreak;
     }
 
-    public long getLastCompleted() {
+    public Date getLastCompleted() {
         return lastCompleted;
     }
 
-    public void setLastCompleted(long lastCompleted) {
+    public void setLastCompleted(Date lastCompleted) {
         this.lastCompleted = lastCompleted;
     }
 }

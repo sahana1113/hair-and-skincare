@@ -1,5 +1,6 @@
 package com.pojo;
-import java.util.Date;
+
+import java.sql.Date;
 
 public class Habits {
     private int habitId;
@@ -7,8 +8,8 @@ public class Habits {
     private String habitName;
     private String habitDescription;
     private String frequency;
-    private long startDate;
-    private long endDate;
+    private Date startDate;
+    private Date endDate;
 
     // Getters and Setters
     public int getHabitId() {
@@ -51,19 +52,19 @@ public class Habits {
         this.frequency = frequency;
     }
 
-    public long getStartDate() {
+    public Date getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(long l) {
-        this.startDate = l;
+    public void setStartDate(Date date) {
+        this.startDate = date;
     }
 
-    public long getEndDate() {
+    public Date getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(long endDate) {
+    public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
 }

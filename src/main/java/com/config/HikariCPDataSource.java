@@ -4,6 +4,8 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import java.io.InputStream;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 
@@ -29,7 +31,7 @@ public class HikariCPDataSource {
             throw new RuntimeException("Failed to initialize JDBC settings", e);
         }
 
-        config.setMaximumPoolSize(50);
+        config.setMaximumPoolSize(100);
         config.setMinimumIdle(2);
         config.setConnectionTimeout(30000);
         config.setIdleTimeout(300000);
@@ -49,4 +51,15 @@ public class HikariCPDataSource {
             System.out.println("Data source closed.");
         }
     }
+
+	public static void closeConnection(Connection conn, PreparedStatement ps, ResultSet rs) {
+            try {
+				conn.close();
+				ps.close();
+				rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+            
+	}
 }

@@ -1,17 +1,19 @@
 package com.pojo;
 
-import java.util.Date;
+import java.sql.Date;
+
+
 
 public class Todo {
     private int todoId;
     private String userId;
     private String taskName;
     private String taskDescription;
-    private long dueDate;
+    private Date dueDate;
     private String status;
 
     // Constructor
-    public Todo(int todoId, String userId, String taskName, String taskDescription, long dueDate, String status) {
+    public Todo(int todoId, String userId, String taskName, String taskDescription, Date dueDate, String status) {
         this.todoId = todoId;
         this.userId = userId;
         this.taskName = taskName;
@@ -57,11 +59,11 @@ public class Todo {
         this.taskDescription = taskDescription;
     }
 
-    public long getDueDate() {
+    public Date getDueDate() {
         return dueDate;
     }
 
-    public void setDueDate(long l) {
+    public void setDueDate(Date l) {
         this.dueDate = l;
     }
 

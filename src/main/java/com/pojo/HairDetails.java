@@ -13,9 +13,6 @@ public class HairDetails {
     @SerializedName("hair_concern")
     private List<String> hairConcerns;
 
-    @SerializedName("hair_texture")
-    private String hairTexture;
-
     @SerializedName("scalp_concern")
     private List<String> scalpConcerns;
 
@@ -28,9 +25,6 @@ public class HairDetails {
     @SerializedName("current_products")
     private List<String> currentProducts;
 
-    @SerializedName("styling_tools")
-    private String stylingToolsUsage;
-
     @SerializedName("chemical_treatments")
     private List<String> chemicalTreatments;
 
@@ -40,17 +34,8 @@ public class HairDetails {
     @SerializedName("growth_goals")
     private String growthGoals;
 
-    @SerializedName("diet")
-    private String diet;
-
-    @SerializedName("water_intake")
-    private String waterIntake;
-
     @SerializedName("stress_level")
     private String stressLevel;
-
-    @SerializedName("natural_products")
-    private String naturalProductPreference;
     
     @SerializedName("allergies")
     private List<String> allergies;
@@ -89,14 +74,6 @@ public class HairDetails {
         this.hairConcerns = hairConcerns;
     }
 
-    public String getHairTexture() {
-        return hairTexture;
-    }
-
-    public void setHairTexture(String hairTexture) {
-        this.hairTexture = hairTexture;
-    }
-
     public List<String> getScalpConcerns() {
         return scalpConcerns;
     }
@@ -129,14 +106,6 @@ public class HairDetails {
         this.currentProducts = currentProducts;
     }
 
-    public String getStylingToolsUsage() {
-        return stylingToolsUsage;
-    }
-
-    public void setStylingToolsUsage(String stylingToolsUsage) {
-        this.stylingToolsUsage = stylingToolsUsage;
-    }
-
     public List<String> getChemicalTreatments() {
         return chemicalTreatments;
     }
@@ -161,22 +130,6 @@ public class HairDetails {
         this.growthGoals = growthGoals;
     }
 
-    public String getDiet() {
-        return diet;
-    }
-
-    public void setDiet(String diet) {
-        this.diet = diet;
-    }
-
-    public String getWaterIntake() {
-        return waterIntake;
-    }
-
-    public void setWaterIntake(String waterIntake) {
-        this.waterIntake = waterIntake;
-    }
-
     public String getStressLevel() {
         return stressLevel;
     }
@@ -185,13 +138,6 @@ public class HairDetails {
         this.stressLevel = stressLevel;
     }
 
-    public String getNaturalProductPreference() {
-        return naturalProductPreference;
-    }
-
-    public void setNaturalProductPreference(String naturalProductPreference) {
-        this.naturalProductPreference = naturalProductPreference;
-    }
     
     public List<String> getAllergies() {
         return allergies;
@@ -200,4 +146,15 @@ public class HairDetails {
     public void setAllergies(List<String> allergies) {
         this.allergies = allergies;
     }
+
+	@Override
+	public String toString() {
+		return "HairDetails [user_id=" + user_id + ", hair_id=" + hair_id + ", hairType=" + hairType + ", hairConcerns="
+				+ hairConcerns.toString() + ", scalpConcerns=" + scalpConcerns.toString() + ", hairLength=" + hairLength + ", washFrequency="
+				+ washFrequency + ", currentProducts=" + currentProducts.toString() + ", chemicalTreatments=" + chemicalTreatments.toString()
+				+ ", seasonalEffects=" + seasonalEffects + ", growthGoals=" + growthGoals + ", stressLevel="
+				+ stressLevel + ", allergies=" + allergies + "]";
+	}
+    
+    
 }

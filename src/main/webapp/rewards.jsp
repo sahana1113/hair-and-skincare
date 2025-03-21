@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="com.dao.*, com.pojo.*" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -327,6 +329,11 @@ a {
     
 </head>
 <body>
+<%   UserDetails user = (UserDetails) session.getAttribute("user");
+if (user == null) {
+    response.sendRedirect("login.jsp"); // Redirect to login if user is not found
+    return;
+} %>
     <aside class="sidebar">
         <div class="sidebar-header">
             <h2><a href="dashboard.jsp">Dashboard</a></h2>
@@ -341,7 +348,7 @@ a {
                 <li><a href="todo.jsp"><i class="fas fa-list"></i><span class="sidebar-text">Your To-Do List</span></a></li>
                 <li><a href="streak.jsp"><i class="fas fa-fire"></i><span class="sidebar-text">Your Streak</span></a></li>
                 <li><a href="rewards.jsp"><i class="fas fa-trophy"></i><span class="sidebar-text">Your Rewards</span></a></li>
-                <li><a href="logout.jsp" class="logout-btn"><i class="fas fa-sign-out-alt"></i><span class="sidebar-text">Logout</span></a></li>
+                <li><a href="${pageContext.request.contextPath}/logout" class="logout-btn"><i class="fas fa-sign-out-alt"></i><span class="sidebar-text">Logout</span></a></li>
             </ul>
         </nav>
     </aside>

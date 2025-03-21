@@ -30,14 +30,8 @@ public class SkinDetails {
     @SerializedName("skin_texture")
     private String skinTexture;
 
-    @SerializedName("regular_experiences")
-    private List<String> regularExperiences;
-
     @SerializedName("water_intake")
     private String waterIntake;
-
-    @SerializedName("product_preference")
-    private List<String> productPreference;
 
     @SerializedName("skin_treatment")
     private List<String> skinTreatment;
@@ -124,28 +118,12 @@ public class SkinDetails {
         this.skinTexture = skinTexture;
     }
 
-    public List<String> getRegularExperiences() {
-        return regularExperiences;
-    }
-
-    public void setRegularExperiences(List<String> regularExperiences) {
-        this.regularExperiences = regularExperiences;
-    }
-
     public String getWaterIntake() {
         return waterIntake;
     }
 
     public void setWaterIntake(String waterIntake) {
         this.waterIntake = waterIntake;
-    }
-
-    public List<String> getProductPreference() {
-        return productPreference;
-    }
-
-    public void setProductPreference(List<String> productPreference) {
-        this.productPreference = productPreference;
     }
 
     public List<String> getSkinTreatment() {
@@ -161,8 +139,8 @@ public class SkinDetails {
 		return "SkinDetails [user_id=" + user_id + ", skin_id=" + skin_id + ", skinType=" + skinType + ", skinConcerns="
 				+ skinConcerns.toString() + ", goals=" + goals.toString() + ", skincareFrequency=" + skincareFrequency + ", currentProducts="
 				+ currentProducts.toString() + ", allergies=" + allergies.toString() + ", sunExposure=" + sunExposure + ", skinTexture="
-				+ skinTexture + ", regularExperiences=" + regularExperiences!=null?regularExperiences.toString():"null" + ", waterIntake=" + waterIntake
-				+ ", productPreference=" + productPreference.toString() +  "]";
+				+ skinTexture + ", waterIntake=" + waterIntake
+				+ "]";
 	}
     
 

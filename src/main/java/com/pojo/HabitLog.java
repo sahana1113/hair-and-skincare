@@ -1,11 +1,11 @@
 package com.pojo;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class HabitLog {
     private int logId;
     private int habitId;
-    private long logDate;
+    private Date logDate;
     private String status;
 
     // Getters and Setters
@@ -25,11 +25,11 @@ public class HabitLog {
         this.habitId = habitId;
     }
 
-    public long getLogDate() {
+    public Date getLogDate() {
         return logDate;
     }
 
-    public void setLogDate(long logDate) {
+    public void setLogDate(Date logDate) {
         this.logDate = logDate;
     }
 
